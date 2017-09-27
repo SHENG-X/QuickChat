@@ -5,13 +5,30 @@
   <title>Quick Chat</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
   <link rel='stylesheet prefetch' href='http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css'>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
   <link rel="stylesheet" href="css/style2.css">
   <style type="text/css">
-      body{
+  body{
     background: url('bk.jpg');
     background-size: cover;
   }
+  input::-webkit-contacts-auto-fill-button {
+  visibility: hidden;
+  display: none !important;
+  pointer-events: none;
+  position: absolute;
+  right: 0;
+  }
+  .alert{
+    color:#ef300e;
+  }
+  .alert{
+    display: none;
+  }
   </style>
+}
 </head>
 
 <body> 
@@ -24,16 +41,25 @@
     <div class="row">
       <h4>Account</h4>
       <div class="input-group input-group-icon">
-        <input type="text" placeholder="User Name"/>
+        <input type="text" placeholder="User Name" id='username'/>
         <div class="input-icon"><i class="fa fa-user"></i></div>
+        <div class="alert" id='username-warning'>
+          <strong>Warning:</strong> Invalid Username!
+        </div>
       </div>
       <div class="input-group input-group-icon">
-        <input type="email" placeholder="Email Adress"/>
+        <input type="email" placeholder="Email Adress" id='email'/>
         <div class="input-icon"><i class="fa fa-envelope"></i></div>
+        <div class="alert" id='email-warning'>
+          <strong>Warning:</strong> Email exists!
+        </div>
       </div>
       <div class="input-group input-group-icon">
-        <input type="password" placeholder="Password"/>
+        <input type="password" placeholder="Password" id='password'/>
         <div class="input-icon"><i class="fa fa-key"></i></div>
+        <div class="alert" id='password-warning'>
+          <strong>Warning:</strong> Password length should be more than 5 characthers
+        </div>
       </div>
     </div>
     <div class="row">
@@ -41,22 +67,25 @@
         <h4>Date of Birth</h4>
         <div class="input-group">
           <div class="col-third">
-            <input type="text" placeholder="DD"/>
+            <input type="text" placeholder="DD" id='dob-dd' maxlength="2"/>
           </div>
           <div class="col-third">
-            <input type="text" placeholder="MM"/>
+            <input type="text" placeholder="MM" id='dob-mm' maxlength="2"/>
           </div>
           <div class="col-third">
-            <input type="text" placeholder="YYYY"/>
+            <input type="text" placeholder="YYYY" id='dob-yy' maxlength="4"/>
           </div>
+        </div>
+        <div class="alert" id='dob-warning'>
+          <strong>Warning: </strong>Please enter valid Birth date.
         </div>
       </div>
       <div class="col-half">
         <h4>Gender</h4>
-        <div class="input-group">
-          <input type="radio" name="gender" value="male" id="gender-male"/>
+        <div class="input-group" id='gender'>
+          <input type="radio" name="gender" value="0" id="gender-male"/>
           <label for="gender-male">Male</label>
-          <input type="radio" name="gender" value="female" id="gender-female"/>
+          <input type="radio" name="gender" value="1" id="gender-female"/>
           <label for="gender-female">Female</label>
         </div>
       </div>
@@ -64,19 +93,19 @@
     <div class="row">
       <div class="col-half">
         <h4>Official Language</h4>
-        <div class="input-group">
-          <input type="radio" name="language" value="english" id="language-english"/>
+        <div class="input-group" id='languages'>
+          <input type="radio" name="language" value="0" id="language-english"/>
           <label for="language-english">English</label>
-          <input type="radio" name="language" value="french" id="language-french"/>
+          <input type="radio" name="language" value="1" id="language-french"/>
           <label for="language-french">French</label>
         </div>
       </div>
       <div class="col-half">
         <h4>Country</h4>
         <div class="input-group">
-          <select>
-            <option>Canada</option>
-            <option>USA</option>
+          <select id='countrys'>
+            <option value="0">Canada</option>
+            <option value="1">USA</option>
           </select>
         </div>
       </div>
@@ -95,4 +124,205 @@
   </form>
 </div>
 </body>
+<script type="text/javascript">
+
+  $("#username").change(function(){
+    var username=$('#username').val();
+    $.ajax({
+            url: "register.php",
+            data:{'username':username},
+            dataType:'text',
+            success: function(data){
+            if(data==0&&username!=''){
+              $('#username-warning').show();
+              $('#username').val('');
+              $('#username').css('border-color', 'red');
+            }
+        },
+        type:'POST'
+        });
+  });
+
+  $("#password").change(function(){
+    var password=$('#password').val();
+    $.ajax({
+            url: "register.php",
+            data:{'password':password},
+            dataType:'text',
+            success: function(data){
+            if(data==0&&password!=''){
+              $('#password-warning').show();
+              $('#password').val('');
+              $('#password').css('border-color', 'red');
+            }
+        },
+        type:'POST'
+        });
+  });
+
+  $("#email").change(function(){
+    var email=$('#email').val();
+    $.ajax({
+            url: "register.php",
+            data:{'email':email},
+            dataType:'text',
+            success: function(data){
+            if(data==0&&email!=''){
+              $('#email-warning').show();
+              $('#email').val('');
+              $('#email').css('border-color', 'red');
+            }
+        },
+        type:'POST'
+        });
+  });
+
+  $("#dob-dd").change(function(){
+    var dd=$('#dob-dd').val();
+    var mm=$('#dob-mm').val();
+    $.ajax({
+            url: "register.php",
+            data:{'dob-dd':dd,'dob-mm':mm},
+            dataType:'text',
+            success: function(data){
+            if(data==0&&dd!=''){
+              $('#dob-warning').show();
+              $('#dob-dd').val('');
+              $('#dob-mm').val('');
+            }
+        },
+        type:'POST'
+        });
+  });
+
+  $("#dob-mm").change(function(){
+    var mm=$('#dob-mm').val();
+    var dd=$('#dob-dd').val();
+    $.ajax({
+            url: "register.php",
+            data:{'dob-mm':mm,'dob-dd':dd},
+            dataType:'text',
+            success: function(data){
+            if(data==0&&mm!=''||data=='10'){
+              $('#dob-warning').show();
+              $('#dob-dd').val('');
+              $('#dob-mm').val('');
+            }
+        },
+        type:'POST'
+        });
+  });
+
+  $("#dob-yy").change(function(){
+    var yy=$('#dob-yy').val();
+    $.ajax({
+            url: "register.php",
+            data:{'dob-yy':yy},
+            dataType:'text',
+            success: function(data){
+            if(data==0&&yy!=''){
+              $('#dob-warning').show();
+              $('#dob-yy').val('');
+            }
+        },
+        type:'POST'
+        });
+  });
+
+  $("#username").click(function(){
+    $('#username').css('border-color', '#7ed321');
+    $('#username-warning').hide();
+  });
+
+    $("#password").click(function(){
+    $('#password').css('border-color', '#7ed321');
+    $("#password-warning").hide();
+  });
+
+  $("#email").click(function(){
+    $('#email').css('border-color', '#7ed321');
+    $('#email-warning').hide();
+  });
+
+  $("#dob-dd").click(function(){
+    $('#dob-dd').css('border-color', '#7ed321');
+    $("#dob-warning").hide();
+  });
+
+  $("#dob-mm").click(function(){
+    $('#dob-mm').css('border-color', '#7ed321');
+    $("#dob-warning").hide();
+  });
+
+  $("#dob-yy").click(function(){
+    $('#dob-yy').css('border-color', '#7ed321');
+    $("#dob-warning").hide();
+  });
+
+  $("#gender").click(
+    function(){
+      $("#gender").css('border','0px solid red');
+    }
+    );
+
+  $("#languages").click(
+    function(){
+      $("#languages").css('border','0px solid red');
+    }
+    );
+
+  $("#sign-up").click(function(){
+    if($('#terms').is(':checked')){
+      var gender = $("input[name='gender']:checked").val();
+      var language = $("input[name='language']:checked").val();
+      var country = $('#countrys').find(":selected").val();
+      var username=$('#username').val();
+      var password=$("#password").val();
+      var email=$("#email").val();
+      var dobdd=$("#dob-dd").val();
+      var dobmm=$("#dob-mm").val();
+      var dobyy=$("#dob-yy").val();
+      if(gender==undefined){
+        $("#gender").css('border','1px solid red');
+        $("#gender").css('border-radius','4px');
+      }
+      if(language==undefined){
+        $("#languages").css('border','1px solid red');
+        $("#languages").css('border-radius','4px');
+      }
+
+      if(gender&&language){
+        var username=$('#username').val();
+        var password=$("#password").val();
+        var email=$("#email").val();
+        var dobdd=$("#dob-dd").val();
+        var dobmm=$("#dob-mm").val();
+        var dobyy=$("#dob-yy").val();
+        $.ajax({
+          url:"register.php",
+          data:{'signup':1,'username2':username,'password2':password,'email2':email,'dobdd':dobdd,'dobmm':dobmm,'dobyy':dobyy,'gender':gender,'language':language,'country':country},
+          dataType:'text',
+          success: function(data){
+            if(data==1){
+              $(location).attr('href','index.html');
+              $('input').val('');
+              $('#sign-up').val('Sign Up');
+              $(':radio').each(function () {
+                $(this).removeAttr('checked');
+                $('input[type="radio"]').prop('checked', false);
+                });
+            }else{
+              alert('Please complete the form!');
+            }
+          },
+          type:'POST'
+        });
+      }
+    }
+    else{
+      alert('Plase check the Privacy terms & Conditions confirm that you agreed with the terms.');
+    }
+  });
+ 
+</script>
 </html>

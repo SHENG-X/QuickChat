@@ -5,6 +5,7 @@
   <title>Quick Chat</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
   <link rel='stylesheet prefetch' href='http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css'>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <link rel="stylesheet" href="css/style2.css">
   <style type="text/css">
   .message {
@@ -35,25 +36,40 @@
     <div class="row">
       <h1 style="text-align: center;">Log In</h1>
       <div class="input-group input-group-icon">
-        <input type="text" placeholder="Username Name"/>
+        <input type="text" placeholder="Username Name" id='username'/>
         <div class="input-icon"><i class="fa fa-user"></i></div>
       </div>
       
       <div class="input-group input-group-icon">
-        <input type="password" placeholder="Password"/>
+        <input type="password" placeholder="Password" id='password'/>
         <div class="input-icon"><i class="fa fa-key"></i></div>
       </div>
     </div>
     
     <div class="input-group">
-          <input type="button" name="login" value="Log In" id='log-ip' class='nextbutton'/>
+          <input type="button" name="login" value="Sign In" id='log-in' class='nextbutton'/>
     </div>
         <p class="message">Not registered? <a href="register.html">Create an account</a> <b style="color: black">/</b> Forget Password? <a href="findmypassword.html">Find my password</a></p>
-
   </form>
 </div>
-  
-
-
+<script type="text/javascript">
+  $("#log-in").click(function(){
+    var username=$("#username").val();
+    var password=$('#password').val();
+    $.ajax({
+      url:'signin.php',
+      data:{'username':username,'password':password},
+      dataType:'text',
+      success: function(data){
+        if(data==1){
+            $(location).attr('href','chatroom.html');
+        }else{
+          alert(data);
+        }
+      },
+      type: 'POST'
+    });
+  });
+</script>
 </body>
 </html>

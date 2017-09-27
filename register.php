@@ -1,7 +1,7 @@
 <?php
 include('classes/DB.php');
 if(isset($_POST['username'])&&!empty($_POST['username'])){
-	if(DB::query('SELECT username FROM user WHERE username=:username',array(':username'=>$_POST['username']))||!preg_match("/[a-zA-Z0-9_]/",$_POST['username'])||strlen($_POST['username'])<3){
+	if(DB::query('SELECT username FROM user WHERE username=:username',array(':username'=>$_POST['username']))||!preg_match("/[a-zA-Z0-9_]/",$_POST['username'])||strlen($_POST['username'])<3||strlen($_POST['username'])>32){
 		echo 0;
 	}
 	else{
@@ -10,8 +10,11 @@ if(isset($_POST['username'])&&!empty($_POST['username'])){
 }
 
 if(isset($_POST['email'])&&!empty($_POST['email'])){
-	if(DB::query('SELECT email FROM user WHERE email=:email',array(':email'=>$_POST['email']))||!filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)){
-		echo 0;
+	if(DB::query('SELECT email FROM user WHERE email=:email',array(':email'=>$_POST['email']))){
+		echo 'Email exist!';
+	}
+	else if(!filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)){
+		echo 'Please enter valid email!';
 	}
 	else{
 		echo 1;

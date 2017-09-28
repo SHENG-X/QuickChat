@@ -1,6 +1,12 @@
 <!DOCTYPE html>
 <html>
 <head>
+  <?php
+    include ('classes/Login.php');
+    if(!Login::isLoggedin()){
+      header('Location:index.html');
+    }
+  ?>
   <!-- Latest compiled and minified CSS -->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -99,6 +105,7 @@ i:hover{
   height: 2em;
   margin-top: 1em;
 }
+
   </style>
   </head>
 <body>
@@ -109,9 +116,9 @@ i:hover{
         <i class="fa fa-cog" style="font-size:46px;position: relative;top:calc(4vh - 23px);left:calc(50% - 20px);color: #777" id='setting' class='menu'></i>
         <div id='settingitem' class="col-sm-10" style="background: #ffffff;z-index: 99;position: absolute;left:100%;top: 0px;max-height: 100px;padding: 0px;">
            <div class="btn-group-vertical">
-              <button type="button" class="btn btn-default">Change My Profile Image</button>
-              <button type="button" class="btn btn-default">Reset Password</button>
-              <button type="button" class="btn btn-default">Sign Out All Devices</button>
+              <button type="button" class="btn btn-default" data-toggle="modal" data-target="#myModal">Change My Profile Image</button>
+              <button type="button" class="btn btn-default" data-toggle="modal" data-target="#myModal">Reset Password</button>
+              <button type="button" class="btn btn-default" id='signoutall'>Sign Out All Devices</button>
            </div>
         </div>
       </div>
@@ -128,9 +135,9 @@ i:hover{
     <div>
       <div style='height:92vh;background: red;' class='col-sm-2'>
         <hr>
-        <i class="fa fa-sign-out" style="font-size:36px;position:relative;left: calc(50% - 18px);color: #777" title="Sign Out" ></i>
+        <i class="fa fa-sign-out" style="font-size:36px;position:relative;left: calc(50% - 18px);color: #777" title="Sign Out" id='signout'></i>
         <hr>
-        <i class="fa fa-plus" style="font-size:36px;position:relative;left: calc(50% - 18px);color: #777" title="Add Friend"></i>
+        <i class="fa fa-plus" style="font-size:36px;position:relative;left: calc(50% - 18px);color: #777" title="Add Friend" id='addfriend'></i>
       </div>
       <div style='height:92vh;background: blue;padding: 0px' class='col-sm-10'>
         <ul class="list-group col-sm-12" id="contact-list">
@@ -361,8 +368,135 @@ i:hover{
       </table>
     </div>
   </div>
+
+
+
+
+
+ <!-- Trigger the modal with a button -->
+  <button type="button"  data-toggle="modal" data-target="#myModal">Open Modal</button>
+
+  <!-- Modal -->
+  <div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
+    
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Change Profile Image</h4>
+        </div>
+        <div class="modal-body"  style="text-align: center;">
+          <div id="wrapper">
+              <input id="upload-img" type="file" multiple />
+              <br />
+              <div id="image-holder"></div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal" id='upload'>Upload</button>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+
+
+
+
+
+
+
+
+
 </body>
 <script type="text/javascript" src="js/csscontrol.js"></script>
+<script type="text/javascript">
+  $('#signout').click(function(){
+    $.ajax({
+      url:'signout.php',
+      success:function(){
+        location.reload();
+      }
+    })
+  });
+
+$('#signoutall').click(function(){
+    $.ajax({
+      url:'signout.php',
+      data:{'signoutall':1},
+      dataType:'text',
+      success:function(data){
+        location.reload();
+      },
+      type:'POST'
+    })
+  });
+
+  //menu color control
+  $('#signout').mouseover(function(){
+    $('#signout').css('color','#999');
+  });
+  $('#signout').mouseout(function(){
+    $('#signout').css('color','#777');
+  });
+  $('#addfriend').mouseover(function(){
+    $('#addfriend').css('color','#999');
+  });
+  $('#addfriend').mouseout(function(){
+    $('#addfriend').css('color','#777');
+  });
+  $('#setting').mouseover(function(){
+    $('#setting').css('color','#999');
+  });
+  $('#setting').mouseout(function(){
+    $('#setting').css('color','#777');
+  });
+
+
+
+
+
+  $("#upload-img").on('change', function () {
+     //Get count of selected files
+     var countFiles = $(this)[0].files.length;
+     var imgPath = $(this)[0].value;
+     var extn = imgPath.substring(imgPath.lastIndexOf('.') + 1).toLowerCase();
+     var image_holder = $("#image-holder");
+     image_holder.empty();
+     if (extn == "gif" || extn == "png" || extn == "jpg" || extn == "jpeg") {
+         if (typeof (FileReader) != "undefined") {
+             //loop for each file selected for uploaded.
+             for (var i = 0; i < countFiles; i++) {
+                 var reader = new FileReader();
+                 reader.onload = function (e) {
+                     $("<img />", {
+                         "src": e.target.result,
+                             "class": "thumb-image",
+                             'width':'200px'
+                     }).appendTo(image_holder);
+                 }
+                 image_holder.show();
+                 reader.readAsDataURL($(this)[0].files[i]);
+             }
+         } else {
+             alert("This browser does not support FileReader.");
+         }
+     } else {
+         alert("Pls select only images");
+     }
+ });
+
+//upload img to php
+
+
+
+
+
+
+
+
+</script>
 </html>
 
 

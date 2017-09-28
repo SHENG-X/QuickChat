@@ -105,6 +105,11 @@ i:hover{
   height: 2em;
   margin-top: 1em;
 }
+.form-control{
+  width: 50%;
+  margin:auto;
+  display: inline-block;
+}
 
   </style>
   </head>
@@ -116,8 +121,8 @@ i:hover{
         <i class="fa fa-cog" style="font-size:46px;position: relative;top:calc(4vh - 23px);left:calc(50% - 20px);color: #777" id='setting' class='menu'></i>
         <div id='settingitem' class="col-sm-10" style="background: #ffffff;z-index: 99;position: absolute;left:100%;top: 0px;max-height: 100px;padding: 0px;">
            <div class="btn-group-vertical">
-              <button type="button" class="btn btn-default" data-toggle="modal" data-target="#myModal">Change My Profile Image</button>
-              <button type="button" class="btn btn-default" data-toggle="modal" data-target="#myModal">Reset Password</button>
+              <button type="button" class="btn btn-default" data-toggle="modal" data-target="#myModal" id='changeprofile'>Change My Profile Image</button>
+              <button type="button" class="btn btn-default" data-toggle="modal" data-target="#myModal" id='resetpassword'>Reset Password</button>
               <button type="button" class="btn btn-default" id='signoutall'>Sign Out All Devices</button>
            </div>
         </div>
@@ -137,7 +142,7 @@ i:hover{
         <hr>
         <i class="fa fa-sign-out" style="font-size:36px;position:relative;left: calc(50% - 18px);color: #777" title="Sign Out" id='signout'></i>
         <hr>
-        <i class="fa fa-plus" style="font-size:36px;position:relative;left: calc(50% - 18px);color: #777" title="Add Friend" id='addfriend'></i>
+        <i class="fa fa-plus" style="font-size:36px;position:relative;left: calc(50% - 18px);color: #777" title="Add Contact" id='addcontact' data-toggle="modal" data-target="#myModal"></i>
       </div>
       <div style='height:92vh;background: blue;padding: 0px' class='col-sm-10'>
         <ul class="list-group col-sm-12" id="contact-list">
@@ -384,20 +389,34 @@ i:hover{
       <div class="modal-content">
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <h4 class="modal-title">Change Profile Image</h4>
+          <h4 class="modal-title" id='mtitle'>Change Profile Image</h4>
         </div>
         <div class="modal-body"  style="text-align: center;">
-          <div id="wrapper">
-              <input id="upload-img" type="file" multiple />
-              <br />
+          <div id="wrapper" >
+            <form  action='upload.php' method="post" enctype="multipart/form-data" id='imgupload' >
+              <input id="upload-img" type="file" name="fileToUpload" />
               <div id="image-holder"></div>
+              <br>
+              <input  type="submit"  id='submiting' value='Upload' style="display: none">
+            </form>
+
+            <div  id='changepassword'>
+              &nbsp&nbsp&nbsp&nbsp&nbsp&nbspOld Password: <input id="oldpassword" type="password" name="oldpassword" placeholder="old password" class="form-control"/><br><br>
+               &nbsp&nbsp&nbsp&nbsp&nbspNew Password: <input id="newpassword" type="password" name="newpassword" placeholder="new password" class="form-control"/><br><br>
+              Confirm Password: <input id="confirmpassword" type="password" name="confirmpassword" placeholder="confirm password" class="form-control"/><br><br>
+              <p id='indicator' style='color: red'><p>
+              <input  type="submit"  id='submiting2' value='Confirm'>
+            </div>
+
+            <div  id='addcontacts' style="display: none">
+              Add Contact:<input type="text" name="contact" id='contact'>
+              <input type="submit" name="addcontact" value="Add" id='add'>
+            </div>
+
+            <br/>
           </div>
         </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-default" data-dismiss="modal" id='upload'>Upload</button>
-        </div>
       </div>
-      
     </div>
   </div>
 
@@ -440,11 +459,11 @@ $('#signoutall').click(function(){
   $('#signout').mouseout(function(){
     $('#signout').css('color','#777');
   });
-  $('#addfriend').mouseover(function(){
-    $('#addfriend').css('color','#999');
+  $('#addcontact').mouseover(function(){
+    $('#addcontact').css('color','#999');
   });
-  $('#addfriend').mouseout(function(){
-    $('#addfriend').css('color','#777');
+  $('#addcontact').mouseout(function(){
+    $('#addcontact').css('color','#777');
   });
   $('#setting').mouseover(function(){
     $('#setting').css('color','#999');
@@ -477,6 +496,7 @@ $('#signoutall').click(function(){
                      }).appendTo(image_holder);
                  }
                  image_holder.show();
+                 $('#submiting').show();
                  reader.readAsDataURL($(this)[0].files[i]);
              }
          } else {
@@ -488,14 +508,98 @@ $('#signoutall').click(function(){
  });
 
 //upload img to php
+ $('#imgupload').on('submit',(function(e) {
+        e.preventDefault();
+        var formData = new FormData(this);
 
+        $.ajax({
+            type:'POST',
+            url: $(this).attr('action'),
+            data:formData,
+            cache:false,
+            contentType: false,
+            processData: false,
+            success:function(data){
+              alert(data);
+            },
+            error: function(data){
+              alert(data);
+            }
+        });
+    }));
 
+ $('#resetpassword').click(function(){
+  $('#imgupload').hide();
+  $('#changepassword').show();
+  $('#mtitle').text('Reset Password');
+ });
+ $('#changeprofile').click(function(){
+  $('#changepassword').hide();
+  $('#imgupload').show();
+  $('#mtitle').text('Change Profile Image');
 
-
-
-
-
-
+ });
+ //change password
+ $("#submiting2").click(function(){
+  var oldpassword=$('#oldpassword').val();
+  var newpassword=$('#newpassword').val();
+  var confirmpassword=$('#confirmpassword').val();
+  if(oldpassword!=''&&newpassword!=''&&confirmpassword!=''){
+    if(newpassword==confirmpassword){
+      if(newpassword.length>5&&newpassword.length<80){
+        $.ajax({
+          url:'changepassword.php',
+          data:{'oldpassword':oldpassword,'newpassword':newpassword},
+          dataType:'text',
+          success:function(data){
+            //need change to display feedback
+            alert(data);
+          },
+          error:function(){
+            alert('Error..');
+          },
+          type:'POST'
+        });
+      }
+      else{
+        $("#newpassword").css('border-color','red');
+        $("#confirmpassword").css('border-color','red');
+        $('#indicator').html('<strong>Warning:</strong>Password should contain more than 5 characters');
+        alert('Invalid password');
+      }
+    }
+    else{
+      $("#newpassword").css('border-color','red');
+      $("#confirmpassword").css('border-color','red');
+      $('#indicator').html('<strong>Warning:</strong>Password dose not match');
+      alert('Password does not match');
+    }
+  }
+  else{
+    if(oldpassword==''){$("#oldpassword").css('border-color','red');}
+    if(newpassword==''){$("#newpassword").css('border-color','red');}
+    if(confirmpassword==''){$("#confirmpassword").css('border-color','red');}
+    $('#indicator').html('<strong>Warning:</strong>Please complete the form');
+    alert('Please complete the form');
+  }
+ });
+$("#oldpassword").click(function(){
+  $('#oldpassword').css('border-color','');
+  $('#indicator').html("");
+});
+$("#newpassword").click(function(){
+    $('#newpassword').css('border-color','');
+    $('#indicator').html("");
+});
+$("#confirmpassword").click(function(){
+    $('#confirmpassword').css('border-color','');
+    $('#indicator').html("");
+});
+$('#addcontact').click(function(){
+    $("#imgupload").hide();
+    $("#changepassword").hide();
+    $('#addcontacts').show();
+});
 </script>
 </html>
 

@@ -10,108 +10,14 @@
   <!-- Latest compiled and minified CSS -->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" type="text/css" href="css/chat.css">
 </head>
   <!-- jQuery library -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <!-- Latest compiled JavaScript -->
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
   <title>Quick Chat</title>
-  <style type="text/css">
-    tr{
-      height: 5.5vh;
-      background: white;
-      border: 1px solid black;
-    }
-    tr>td:nth-child(1){
-      text-align: left;
-      padding-left: 15px;
-      font-size: 13px;
-      font-weight: bold;
-    } 
-    tr>td:nth-child(2){
-      text-align: right;
-      padding-right: 15px;
-      font-size: 13px;
-    }
-    #setting:hover{
-      cursor: pointer;
-    }
-  .search-form .form-group {
-  float: right !important;
-  transition: all 0.35s, border-radius 0s;
-  width: 20vw;
-  height: 32px;
-  background-color: #fff;
-  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset;
-  border-radius: 25px;
-  border: 1px solid #ccc;
-  position: relative;
-  right: calc(50% - 10vw);
-  bottom:calc(-4vh + 16px);
-}
-.search-form .form-group input.form-control {
-  padding-right: 20px;
-  border: 0 none;
-  background: transparent;
-  box-shadow: none;
-  display:block;
-  text-align: center;
-}
-.search-form .form-group span.form-control-feedback {
-  position: absolute;
-  top: -1px;
-  right: -2px;
-  z-index: 2;
-  display: block;
-  width: 34px;
-  height: 34px;
-  line-height: 34px;
-  text-align: center;
-  color: #3596e0;
-  left: initial;
-  font-size: 14px;
-}
-#contact-list{
-  padding: 0px;
-  margin:0px;
-  position: relative;
-  background: blue;
-}
-ul{
-  overflow: auto;
-  height: 92vh;
-}
-i:hover{
-  cursor: pointer;
-}
-#settingitem{
-  display: none;
-}
-#settingitem ul{
-  list-style: none;
-  padding: 0px;
-}
-#setting:hover~#settingitem{
-  display: block;
-}
-#settingitem:hover{
-  display: block;
-}
-#settingcontainer:hover #settingitem{
-  display: block;
-}
-#setting-group-item li{
-  display: block;
-  height: 2em;
-  margin-top: 1em;
-}
-.form-control{
-  width: 50%;
-  margin:auto;
-  display: inline-block;
-}
 
-  </style>
   </head>
 <body>
 
@@ -411,197 +317,44 @@ i:hover{
             <div  id='addcontacts' style="display: none">
               Add Contact:<input type="text" name="contact" id='contact'>
               <input type="submit" name="addcontact" value="Add" id='add'>
+              <p id='hl' style="color: red"></p>
             </div>
-
             <br/>
           </div>
         </div>
       </div>
     </div>
   </div>
-
-
-
-
-
-
-
-
-
 </body>
 <script type="text/javascript" src="js/csscontrol.js"></script>
+<script type="text/javascript" src='js/chatmenu.js'></script>
 <script type="text/javascript">
-  $('#signout').click(function(){
-    $.ajax({
-      url:'signout.php',
-      success:function(){
-        location.reload();
-      }
-    })
-  });
-
-$('#signoutall').click(function(){
-    $.ajax({
-      url:'signout.php',
-      data:{'signoutall':1},
-      dataType:'text',
-      success:function(data){
-        location.reload();
-      },
-      type:'POST'
-    })
-  });
-
-  //menu color control
-  $('#signout').mouseover(function(){
-    $('#signout').css('color','#999');
-  });
-  $('#signout').mouseout(function(){
-    $('#signout').css('color','#777');
-  });
-  $('#addcontact').mouseover(function(){
-    $('#addcontact').css('color','#999');
-  });
-  $('#addcontact').mouseout(function(){
-    $('#addcontact').css('color','#777');
-  });
-  $('#setting').mouseover(function(){
-    $('#setting').css('color','#999');
-  });
-  $('#setting').mouseout(function(){
-    $('#setting').css('color','#777');
-  });
-
-
-
-
-
-  $("#upload-img").on('change', function () {
-     //Get count of selected files
-     var countFiles = $(this)[0].files.length;
-     var imgPath = $(this)[0].value;
-     var extn = imgPath.substring(imgPath.lastIndexOf('.') + 1).toLowerCase();
-     var image_holder = $("#image-holder");
-     image_holder.empty();
-     if (extn == "gif" || extn == "png" || extn == "jpg" || extn == "jpeg") {
-         if (typeof (FileReader) != "undefined") {
-             //loop for each file selected for uploaded.
-             for (var i = 0; i < countFiles; i++) {
-                 var reader = new FileReader();
-                 reader.onload = function (e) {
-                     $("<img />", {
-                         "src": e.target.result,
-                             "class": "thumb-image",
-                             'width':'200px'
-                     }).appendTo(image_holder);
-                 }
-                 image_holder.show();
-                 $('#submiting').show();
-                 reader.readAsDataURL($(this)[0].files[i]);
-             }
-         } else {
-             alert("This browser does not support FileReader.");
-         }
-     } else {
-         alert("Pls select only images");
-     }
- });
-
-//upload img to php
- $('#imgupload').on('submit',(function(e) {
-        e.preventDefault();
-        var formData = new FormData(this);
-
-        $.ajax({
-            type:'POST',
-            url: $(this).attr('action'),
-            data:formData,
-            cache:false,
-            contentType: false,
-            processData: false,
-            success:function(data){
-              alert(data);
-            },
-            error: function(data){
-              alert(data);
-            }
-        });
-    }));
-
- $('#resetpassword').click(function(){
-  $('#imgupload').hide();
-  $('#changepassword').show();
-  $('#mtitle').text('Reset Password');
- });
- $('#changeprofile').click(function(){
-  $('#changepassword').hide();
-  $('#imgupload').show();
-  $('#mtitle').text('Change Profile Image');
-
- });
- //change password
- $("#submiting2").click(function(){
-  var oldpassword=$('#oldpassword').val();
-  var newpassword=$('#newpassword').val();
-  var confirmpassword=$('#confirmpassword').val();
-  if(oldpassword!=''&&newpassword!=''&&confirmpassword!=''){
-    if(newpassword==confirmpassword){
-      if(newpassword.length>5&&newpassword.length<80){
-        $.ajax({
-          url:'changepassword.php',
-          data:{'oldpassword':oldpassword,'newpassword':newpassword},
-          dataType:'text',
-          success:function(data){
-            //need change to display feedback
-            alert(data);
-          },
-          error:function(){
-            alert('Error..');
-          },
-          type:'POST'
-        });
-      }
-      else{
-        $("#newpassword").css('border-color','red');
-        $("#confirmpassword").css('border-color','red');
-        $('#indicator').html('<strong>Warning:</strong>Password should contain more than 5 characters');
-        alert('Invalid password');
-      }
+  // add contact control
+  $('#hl').hide();
+  $("#add").click(function(){
+    var username=$('#contact').val();
+    $("#contact").val("");
+    if(username.length>3){
+      $.ajax({
+        url:'addContacts.php',
+        data:{'username':username},
+        dataType:'text',
+        success:function(data){
+          alert(data);
+        },
+        type:'POST'
+      });
     }
     else{
-      $("#newpassword").css('border-color','red');
-      $("#confirmpassword").css('border-color','red');
-      $('#indicator').html('<strong>Warning:</strong>Password dose not match');
-      alert('Password does not match');
-    }
-  }
-  else{
-    if(oldpassword==''){$("#oldpassword").css('border-color','red');}
-    if(newpassword==''){$("#newpassword").css('border-color','red');}
-    if(confirmpassword==''){$("#confirmpassword").css('border-color','red');}
-    $('#indicator').html('<strong>Warning:</strong>Please complete the form');
-    alert('Please complete the form');
-  }
- });
-$("#oldpassword").click(function(){
-  $('#oldpassword').css('border-color','');
-  $('#indicator').html("");
-});
-$("#newpassword").click(function(){
-    $('#newpassword').css('border-color','');
-    $('#indicator').html("");
-});
-$("#confirmpassword").click(function(){
-    $('#confirmpassword').css('border-color','');
-    $('#indicator').html("");
-});
-$('#addcontact').click(function(){
-    $("#imgupload").hide();
-    $("#changepassword").hide();
-    $('#addcontacts').show();
-});
+      $('#hl').show();
+      $('#hl').html('<strong>Warning: </strong> Invalid username');
+    }    
+  });
+  $('#contact').click(function(){
+      $('#hl').hide();
+  });
+  //end of add contact control
 </script>
 </html>
 
 
-<!--https://bootsnipp.com/snippets/featured/contact-list-->

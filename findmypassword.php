@@ -5,8 +5,11 @@ if(isset($_POST['email'])&&$_POST['email']!=''&&filter_var($_POST['email'], FILT
 		$userid=DB::query("SELECT id FROM user WHERE email=:email",array(":email"=>$_POST['email']))[0]['id'];
 		$cstrong=true;
 		$token=openssl_random_pseudo_bytes(64,$cstrong);
+		$token=sha1($token);
 		DB::query('INSERT INTO vcode(code,userid) VALUES(:code,:userid)',array(":code"=>sha1($token),":userid"=>$userid));
-		echo $userid;
+		//echo $userid;
+		$data=array($userid,$token);
+		echo implode(',,',$data);
 	}
 	else{
 		echo "Email does not exists!";

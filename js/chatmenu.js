@@ -26,11 +26,17 @@ $('#signoutall').click(function(){
   $('#signout').mouseout(function(){
     $('#signout').css('color','#777');
   });
-  $('#addcontact').mouseover(function(){
-    $('#addcontact').css('color','#999');
+  $('#creategroup').mouseover(function(){
+    $('#creategroup').css('color','#999');
   });
-  $('#addcontact').mouseout(function(){
-    $('#addcontact').css('color','#777');
+  $('#creategroup').mouseout(function(){
+    $('#creategroup').css('color','#777');
+  });
+  $('#addgroup').mouseover(function(){
+    $('#addgroup').css('color','#999');
+  });
+  $('#addgroup').mouseout(function(){
+    $('#addgroup').css('color','#777');
   });
   $('#setting').mouseover(function(){
     $('#setting').css('color','#999');
@@ -94,13 +100,15 @@ $('#signoutall').click(function(){
  $('#resetpassword').click(function(){
   $('#imgupload').hide();
   $('#changepassword').show();
-  $('#addcontacts').hide();
+  $('#createGroups').hide();
+  $('#addgroups').hide();
   $('#mtitle').text('Reset Password');
  });
  $('#changeprofile').click(function(){
   $('#changepassword').hide();
   $('#imgupload').show();
-  $('#addcontacts').hide();
+  $('#addgroups').hide();
+  $('#createGroups').hide();
   $('#mtitle').text('Change Profile Image');
 
  });
@@ -160,8 +168,11 @@ $("#confirmpassword").click(function(){
     $('#confirmpassword').css('border-color','');
     $('#indicator').html("");
 });
-$('#addcontact').click(function(){
+$('#creategroup').click(function(){
     $("#imgupload").hide();
+    $('#mtitle').text('Create Group');
     $("#changepassword").hide();
-    $('#addcontacts').show();
+    $('#addgroups').hide();
+    $('#createGroups').show();
 });
+

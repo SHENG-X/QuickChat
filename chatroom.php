@@ -16,7 +16,28 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <!-- Latest compiled JavaScript -->
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <script type="text/javascript">$.ajax({
+  url:'insertgroup.php',
+  dataType:'text',
+  success:function(data){
+    var groups=[];
+    groups=data.split(',');
+    grouplength=groups.length;
+    for(i=0;i<grouplength;i++){
+      var groupname="<li class='list-group-item' id='group"+i+"'><div class='col-xs-12 col-sm-4'><img  src='http://api.randomuser.me/portraits/men/49.jpg' alt='Scott Stevens' class='img-responsive img-circle'  style='display:block;' /></div><div class='col-xs-12 col-sm-8' ><h4 style='overflow-x: auto;'>%data%</h4></div><div class='clearfix'></div></li>";
+      groupname=groupname.replace('%data%',groups[i]);
+      $("#groups-list").append(groupname);
+    }
+  }
+});
+</script>
   <title>Quick Chat</title>
+  <style type="text/css">
+    li:hover{
+      cursor: pointer;
+      background: #777;
+    }
+  </style>
 
   </head>
 <body>
@@ -46,108 +67,25 @@
     <div>
       <div style='height:92vh;background: red;' class='col-sm-2'>
         <hr>
-        <i class="fa fa-sign-out" style="font-size:36px;position:relative;left: calc(50% - 18px);color: #777" title="Sign Out" id='signout'></i>
+        <i class="fa fa-sign-out" style="font-size:36px;position:relative;left: calc(50% - 15px);color: #777" title="Sign Out" id='signout'></i>
         <hr>
-        <i class="fa fa-plus" style="font-size:36px;position:relative;left: calc(50% - 18px);color: #777" title="Add Contact" id='addcontact' data-toggle="modal" data-target="#myModal"></i>
+        <i class="fa fa-sitemap" style="font-size:36px;position:relative;left: calc(50% - 18px);color: #777" title="Create Group" id='creategroup' data-toggle="modal" data-target="#myModal"></i>
+        <hr>
+        <i class="fa fa-plus-circle" style="font-size:36px;position:relative;left: calc(50% - 18px);color: #777" title='Add Group' id='addgroup' data-toggle="modal" data-target="#myModal"></i>
       </div>
       <div style='height:92vh;background: blue;padding: 0px' class='col-sm-10'>
-        <ul class="list-group col-sm-12" id="contact-list">
+        <ul class="list-group col-sm-12" id="groups-list">
+          
           <li class="list-group-item">
-              <div class="col-xs-12 col-sm-5">
-                  <img src="http://api.randomuser.me/portraits/men/49.jpg" alt="Scott Stevens" class="img-responsive img-circle" />
-                  <p style="text-align: center;margin-top: 1em" class='income-msg-num'><span class='badge'>1</span></p>
+              <div class="col-xs-12 col-sm-4">
+                  <img  src="http://api.randomuser.me/portraits/men/49.jpg" alt="Scott Stevens" class="img-responsive img-circle"  style="display:block;" />
               </div>
-              <div class="col-xs-12 col-sm-7">
-                  <span class="name">Scott Stevens</span><br/>
-                  <hr style="margin:0px">
-                  <span class='moment'>Nice day today! Where do you go? I am okay!</span><br/>
+              <div class="col-xs-12 col-sm-8" >
+                <h4 style="overflow-x: auto;">Testing Group</h4>
               </div>
               <div class="clearfix"></div>
           </li>
-          <li class="list-group-item">
-              <div class="col-xs-12 col-sm-5">
-                  <img src="http://api.randomuser.me/portraits/men/49.jpg" alt="Scott Stevens" class="img-responsive img-circle" />
-                  <p style="text-align: center;margin-top: 1em" class='income-msg-num'><span class='badge'>1</span></p>
-              </div>
-              <div class="col-xs-12 col-sm-7">
-                  <span class="name">Scott Stevens</span><br/>
-                  <hr style="margin:0px">
-                  <span class='moment'>Nice day today! Where do you go? I am okay!</span><br/>
-              </div>
-              <div class="clearfix"></div>
-          </li>
-          <li class="list-group-item">
-              <div class="col-xs-12 col-sm-5">
-                  <img src="http://api.randomuser.me/portraits/men/49.jpg" alt="Scott Stevens" class="img-responsive img-circle" />
-                  <p style="text-align: center;margin-top: 1em" class='income-msg-num'><span class='badge'>1</span></p>
-              </div>
-              <div class="col-xs-12 col-sm-7">
-                  <span class="name">Scott Stevens</span><br/>
-                  <hr style="margin:0px">
-                  <span class='moment'>Nice day today! Where do you go? I am okay!</span><br/>
-              </div>
-              <div class="clearfix"></div>
-          </li>
-          <li class="list-group-item">
-              <div class="col-xs-12 col-sm-5">
-                  <img src="http://api.randomuser.me/portraits/men/49.jpg" alt="Scott Stevens" class="img-responsive img-circle" />
-                  <p style="text-align: center;margin-top: 1em" class='income-msg-num'><span class='badge'>1</span></p>
-              </div>
-              <div class="col-xs-12 col-sm-7">
-                  <span class="name">Scott Stevens</span><br/>
-                  <hr style="margin:0px">
-                  <span class='moment'>Nice day today! Where do you go? I am okay!</span><br/>
-              </div>
-              <div class="clearfix"></div>
-          </li>
-          <li class="list-group-item">
-              <div class="col-xs-12 col-sm-5">
-                  <img src="http://api.randomuser.me/portraits/men/49.jpg" alt="Scott Stevens" class="img-responsive img-circle" />
-                  <p style="text-align: center;margin-top: 1em" class='income-msg-num'><span class='badge'>1</span></p>
-              </div>
-              <div class="col-xs-12 col-sm-7">
-                  <span class="name">Scott Stevens</span><br/>
-                  <hr style="margin:0px">
-                  <span class='moment'>Nice day today! Where do you go? I am okay!</span><br/>
-              </div>
-              <div class="clearfix"></div>
-          </li>
-          <li class="list-group-item">
-              <div class="col-xs-12 col-sm-5">
-                  <img src="http://api.randomuser.me/portraits/men/49.jpg" alt="Scott Stevens" class="img-responsive img-circle" />
-                  <p style="text-align: center;margin-top: 1em" class='income-msg-num'><span class='badge'>1</span></p>
-              </div>
-              <div class="col-xs-12 col-sm-7">
-                  <span class="name">Scott Stevens</span><br/>
-                  <hr style="margin:0px">
-                  <span class='moment'>Nice day today! Where do you go? I am okay!</span><br/>
-              </div>
-              <div class="clearfix"></div>
-          </li>
-          <li class="list-group-item">
-              <div class="col-xs-12 col-sm-5">
-                  <img src="http://api.randomuser.me/portraits/men/49.jpg" alt="Scott Stevens" class="img-responsive img-circle" />
-                  <p style="text-align: center;margin-top: 1em" class='income-msg-num'><span class='badge'>1</span></p>
-              </div>
-              <div class="col-xs-12 col-sm-7">
-                  <span class="name">Scott Stevens</span><br/>
-                  <hr style="margin:0px">
-                  <span class='moment'>Nice day today! Where do you go? I am okay!</span><br/>
-              </div>
-              <div class="clearfix"></div>
-          </li>
-          <li class="list-group-item">
-              <div class="col-xs-12 col-sm-5">
-                  <img src="http://api.randomuser.me/portraits/men/49.jpg" alt="Scott Stevens" class="img-responsive img-circle" />
-                  <p style="text-align: center;margin-top: 1em" class='income-msg-num'><span class='badge'>1</span></p>
-              </div>
-              <div class="col-xs-12 col-sm-7">
-                  <span class="name">Scott Stevens</span><br/>
-                  <hr style="margin:0px">
-                  <span class='moment'>Nice day today! Where do you go? I am okay!</span><br/>
-              </div>
-              <div class="clearfix"></div>
-          </li>
+         
 
         </ul>
       </div>
@@ -155,91 +93,9 @@
   </div>
 
   <div class='col-sm-7' style='background: green;height: 100vh;padding: 0px'>
-    <div style='height:8vh;background: white;'>
-      <h3 style="margin:0px;text-align: center;height:100%;padding-top:0.5em">Talk to <span id='#2name'>Scott Stevens<span></h3>
-    </div>
-    <div>
-      <div style='height:80vh;background:yellow;overflow-y:auto;overflow-y: none' class="col-sm-12">
 
-        <div class="row msg_container base_receive">
-          <div class="col-md-2 col-xs-2 avatar">
-              <img src="http://api.randomuser.me/portraits/men/49.jpg" class=" img-responsive img-circle ">
-          </div>
-          <div class="col-md-10 col-xs-10">
-              <div class="messages msg_receive">
-                  <p>that mongodb thing looks good, huh?
-                  tiny master db, and huge document store</p>
-                  <time datetime="2009-11-13T20:00">Timothy • 51 min</time>
-              </div>
-          </div>
-        </div>
+     <div style='height:8vh;background: white;text-align: center;display: table-cell;vertical-align: middle;width:100vw'><h4 ><span id='messagetitle'>Quick Chat</span></h4></div>
 
-        <div class="row msg_container base_sender">
-          <div class="col-md-10 col-xs-10">
-              <div class="messages msg_receive" style="text-align: right;">
-                  <p >that mongodb thing looks good, huh?
-                  tiny master db, and huge document store</p>
-                  <time datetime="2009-11-13T20:00">Timothy • 51 min</time>
-              </div>
-          </div>
-          <div class="col-md-2 col-xs-2 avatar">
-              <img src="http://api.randomuser.me/portraits/men/49.jpg" class=" img-responsive img-circle ">
-          </div>
-        </div>
-
-        <div class="row msg_container base_receive">
-          <div class="col-md-2 col-xs-2 avatar">
-              <img src="http://api.randomuser.me/portraits/men/49.jpg" class=" img-responsive img-circle ">
-          </div>
-          <div class="col-md-10 col-xs-10">
-              <div class="messages msg_receive">
-                  <p>that mongodb thing looks good, huh?
-                  tiny master db, and huge document store</p>
-                  <time datetime="2009-11-13T20:00">Timothy • 51 min</time>
-              </div>
-          </div>
-        </div>
-
-        <div class="row msg_container base_sender">
-          <div class="col-md-10 col-xs-10">
-              <div class="messages msg_receive" style="text-align: right;">
-                  <p >that mongodb thing looks good, huh?
-                  tiny master db, and huge document store</p>
-                  <time datetime="2009-11-13T20:00">Timothy • 51 min</time>
-              </div>
-          </div>
-          <div class="col-md-2 col-xs-2 avatar">
-              <img src="http://api.randomuser.me/portraits/men/49.jpg" class=" img-responsive img-circle ">
-          </div>
-        </div>
-
-        <div class="row msg_container base_receive">
-          <div class="col-md-2 col-xs-2 avatar">
-              <img src="http://api.randomuser.me/portraits/men/49.jpg" class=" img-responsive img-circle ">
-          </div>
-          <div class="col-md-10 col-xs-10">
-              <div class="messages msg_receive">
-                  <p>that mongodb thing looks good, huh?
-                  tiny master db, and huge document store</p>
-                  <time datetime="2009-11-13T20:00">Timothy • 51 min</time>
-              </div>
-          </div>
-        </div>
-
-        <div class="row msg_container base_sender">
-          <div class="col-md-10 col-xs-10">
-              <div class="messages msg_receive" style="text-align: right;">
-                  <p >that mongodb thing looks good, huh?
-                  tiny master db, and huge document store</p>
-                  <time datetime="2009-11-13T20:00">Timothy • 51 min</time>
-              </div>
-          </div>
-          <div class="col-md-2 col-xs-2 avatar">
-              <img src="http://api.randomuser.me/portraits/men/49.jpg" class=" img-responsive img-circle ">
-          </div>
-        </div>
-
-      </div>
       <div>
          <form style='height:12vh;background: red;position:absolute;bottom: 0px;z-index: 10;width: 100%'>
           <div class="form-group" >
@@ -253,44 +109,35 @@
         </form>
       </div>
     </div>
-  </div>
+
 
 
   <div class='col-sm-2' style='background: blue;height: 100vh;padding: 0px'>
     <div style='height:8vh;background: yellow;text-align: center;'>
-      <i class="fa fa-comments-o" style="font-size:36px"></i>
+        <i class="fa fa-user-circle-o" style="font-size:2.5em;position: relative;top: 1vh"></i>
     </div>
+    
     <div id='profile' style="height: 30%;background: red">
       <div id='profile-img' style="height: 70%;background: red">
-        <img src='https://www.w3schools.com/w3css/img_avatar3.png' class="img-circle" width="100px" height="100px" style="position: relative;left: calc(50% - 50px);top:calc(50% - 50px)">
+        <img src='https://www.w3schools.com/w3css/img_avatar3.png' class="img-circle" style="position: relative;left: calc(50% - 9vh);top:calc(2vh);width:18vh; height:18vh ">
       </div>
-      <div id='profile-n' style="height: 30%;background: green;text-align: center;">
-        <h4 style="background: green;margin: 0px;height: 5vh;padding-top:8px">Kirsten McKellar</h4>
-        <h5 style="background: Lightgreen;margin: 0px;height: 4vh" >Cape Town RSA</h5>
-      </div>
-    </div>
-    <div id='profile_info'>
+      <div id='profile_info'>
       <table style="width: 100%">
-        <tr><td>Nickmame:</td><td>Miky Don</td></tr>
+        <tr><td>Name:</td><td>Miky Don</td></tr>
         <tr><td>Tel:</td><td>2503200181</td></tr>
         <tr><td>Date of Birth:</td><td>Jul. 12,1988</td></tr>
         <tr><td>Gender:</td><td>Female</td></tr>
+        <tr><td>Country:</td><td>Canada</td></tr>
         <tr><td>Language:</td><td>English</td></tr>
       </table>
+    </div>
     </div>
   </div>
 
 
-
-
-
- <!-- Trigger the modal with a button -->
-  <button type="button"  data-toggle="modal" data-target="#myModal">Open Modal</button>
-
   <!-- Modal -->
   <div class="modal fade" id="myModal" role="dialog">
     <div class="modal-dialog">
-    
       <!-- Modal content-->
       <div class="modal-content">
         <div class="modal-header">
@@ -314,11 +161,18 @@
               <input  type="submit"  id='submiting2' value='Confirm'>
             </div>
 
-            <div  id='addcontacts' style="display: none">
-              Add Contact:<input type="text" name="contact" id='contact'>
-              <input type="submit" name="addcontact" value="Add" id='add'>
+            <div  id='createGroups' style="display: none">
+              Group Name:<input type="text" name="contact" id='createg' placeholder="Group Name">
+              <input type="submit"  value="Create" id='create'>
               <p id='hl' style="color: red"></p>
             </div>
+
+            <div  id='addgroups' style="display: none">
+              Add Group:<input type="text" name="contact" id='add-group' placeholder="Group Name">
+              <input type="submit"  value="Add Group" id='add'>
+              <p id='addwarning' style="color: red"></p>
+            </div>
+
             <br/>
           </div>
         </div>
@@ -329,31 +183,82 @@
 <script type="text/javascript" src="js/csscontrol.js"></script>
 <script type="text/javascript" src='js/chatmenu.js'></script>
 <script type="text/javascript">
-  // add contact control
+  // create group control
   $('#hl').hide();
-  $("#add").click(function(){
-    var username=$('#contact').val();
-    $("#contact").val("");
-    if(username.length>3){
+  $("#create").click(function(){
+    var groupname=$('#createg').val();
+    $("#createg").val("");
+    if(groupname.length>3){
       $.ajax({
-        url:'addContacts.php',
-        data:{'username':username},
+        url:'creategroup.php',
+        data:{'groupname':groupname},
         dataType:'text',
         success:function(data){
-          alert(data);
+          if(data==0){
+            $('#hl').show();
+            $('#hl').html('<strong>Warning: </strong> Group name taken');
+          }
+          else{
+            alert('Group Created!');
+            location.reload();
+          }
         },
         type:'POST'
       });
     }
     else{
       $('#hl').show();
-      $('#hl').html('<strong>Warning: </strong> Invalid username');
+      $('#hl').html('<strong>Warning: </strong> Invalid group name');
     }    
   });
-  $('#contact').click(function(){
+  $('#createg').click(function(){
       $('#hl').hide();
   });
-  //end of add contact control
+  //end of create group control
+
+  $('#addgroup').click(function(){
+    $('#createGroups').hide();
+    $("#imgupload").hide();
+    $('#mtitle').text('Add a Group');
+    $("#changepassword").hide();
+    $('#addgroups').show();
+  });
+
+  $('#add-group').click(function(){
+    $('#addwarning').html("");
+  });
+
+  $("#add").click(function(){
+    var groupname=$('#add-group').val();
+    if(groupname.length<3){
+      $("#addwarning").html('<strong>Warning: </strong> Invalid group name');
+    }
+    else{
+      $.ajax({
+        url:'addgroup.php',
+        data:{'groupname':groupname},
+        dataType:'text',
+        success:function(data){
+          if(data==0){
+            $("#addwarning").html('<strong>Warning: </strong>Group was not find');
+          }
+          else{alert(data);}
+        },
+        type:'POST'
+      });
+    }
+  });
+
+
+$('document').ready(function(){
+  $('li').click(function(){
+    var targetvar='#'+this.id+' h4';
+    alert($(targetvar).text()+' is selected');
+    $("#messagetitle").text($(targetvar).text());
+});
+});
+
+
 </script>
 </html>
 

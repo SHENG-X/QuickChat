@@ -30,6 +30,7 @@
     }
   }
 });
+
 </script>
   <title>Quick Chat</title>
   <style type="text/css">
@@ -75,7 +76,7 @@
       </div>
       <div style='height:92vh;background: blue;padding: 0px' class='col-sm-10'>
         <ul class="list-group col-sm-12" id="groups-list">
-          
+          <!--Where group names goes-->
           <li class="list-group-item">
               <div class="col-xs-12 col-sm-4">
                   <img  src="http://api.randomuser.me/portraits/men/49.jpg" alt="Scott Stevens" class="img-responsive img-circle"  style="display:block;" />
@@ -95,13 +96,16 @@
   <div class='col-sm-7' style='background: green;height: 100vh;padding: 0px'>
 
      <div style='height:8vh;background: white;text-align: center;display: table-cell;vertical-align: middle;width:100vw'><h4 ><span id='messagetitle'>Quick Chat</span></h4></div>
-
+     <div id='testing' style="background:white;height: 80vh;overflow-y: auto;">
+      <!--Where message goes-->
+     </div>
       <div>
+         <!--Message control-->
          <form style='height:12vh;background: red;position:absolute;bottom: 0px;z-index: 10;width: 100%'>
           <div class="form-group" >
-            <textarea  style='height:100%;resize: none;display:inline-block;position: absolute;left:0px;width:90%;margin:0px;padding: 0px'></textarea>
+            <textarea  style='height:100%;resize: none;display:inline-block;position: absolute;left:0px;width:90%;margin:0px;padding: 0px' id='message'></textarea>
             <div class="input-group-btn" style="display: inline-block; background: green;position: absolute;width: 10%;height:12vh;position: absolute;z-index: 10;right: 0px">
-              <button class="btn btn-default" type="submit" style="display: inline-block;width: 100%;height:12vh">
+              <button class="btn btn-default" type="button" style="display: inline-block;width: 100%;height:12vh" id='sendmessage'>
               <i class="fa fa-send-o" style="font-size:36px"></i>
               </button>
             </div>
@@ -124,7 +128,6 @@
       <div id='profile_info'>
       <table style="width: 100%">
         <tr><td>Name:</td><td>Miky Don</td></tr>
-        <tr><td>Tel:</td><td>2503200181</td></tr>
         <tr><td>Date of Birth:</td><td>Jul. 12,1988</td></tr>
         <tr><td>Gender:</td><td>Female</td></tr>
         <tr><td>Country:</td><td>Canada</td></tr>
@@ -242,6 +245,9 @@
           if(data==0){
             $("#addwarning").html('<strong>Warning: </strong>Group was not find');
           }
+          else if(data=='Success!'){
+            location.reload();
+          }
           else{alert(data);}
         },
         type:'POST'
@@ -253,11 +259,72 @@
 $('document').ready(function(){
   $('li').click(function(){
     var targetvar='#'+this.id+' h4';
-    alert($(targetvar).text()+' is selected');
     $("#messagetitle").text($(targetvar).text());
+    var group=$("#messagetitle").text();
+    $('#testing').html('');
+    $.ajax({
+      url:'messagecontrol.php',
+      data:{'group':group},
+      dataType:'text',
+      success:function(data){
+        $('#testing').html(data);
+        var objDiv = document.getElementById("testing");
+        objDiv.scrollTop = objDiv.scrollHeight;
+      },
+      type:'POST'
+    });
 });
 });
 
+//right side profile control
+  $.ajax({
+  url:'ownerprofile.php',
+  success:function(data){
+    $('#profile_info').html(data);
+  }
+});
+
+//send message control
+$('#sendmessage').click(function(){
+  var message=$('#message').val();
+  var group=$("#messagetitle").text();
+  if(message==''){
+    alert('Can not send empty message!');
+  }
+  else{
+    $.ajax({
+      url:'messagecontrol.php',
+      data:{'group':group,'message':message},
+      dataType:'text',
+      success:function(data){
+        $('#testing').html(data);
+        var objDiv = document.getElementById("testing");
+        objDiv.scrollTop = objDiv.scrollHeight;
+        $('#message').val('');
+      },
+      type:'POST'
+    });
+  }
+});
+$("#search").keyup(function(){
+  searchgroup();
+});
+
+function searchgroup(){
+  var input,filter,ul,li,h4,i;
+  input=document.getElementById('search');
+  filter=input.value;
+  ul=document.getElementById('groups-list');
+  li=ul.getElementsByTagName('li');
+  for(i=0;i<li.length;i++){
+    h4=li[i].getElementsByTagName('h4')[0];
+    if(h4.innerHTML.indexOf(filter)>-1){
+      li[i].style.display='';
+    }else{
+            li[i].style.display='none';
+    }
+  }
+}
 
 </script>
 </html>

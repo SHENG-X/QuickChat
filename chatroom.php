@@ -42,6 +42,10 @@
       cursor: pointer;
       background: #777;
     }
+    .media{
+      padding-left: 10px;
+      padding-right: 10px;
+    }
   </style>
 
   </head>
@@ -102,6 +106,33 @@
      <div style='height:8vh;background: white;text-align: center;display: table-cell;vertical-align: middle;width:100vw'><h4 ><span id='messagetitle'>Quick Chat</span></h4></div>
      <div id='testing' style="background:white;height: 80vh;overflow-y: auto;">
       <!--Where message goes-->
+
+
+    <div class="media" style="width: 60%">
+      <div class="media-left">
+        <img src="https://www.w3schools.com/w3css/img_avatar3.png" class="media-object" style="width:45px">
+      </div>
+      <div class="media-body">
+        <h4 class="media-heading">John Doe <small><i>Posted on February 19, 2016</i></small></h4>
+        <p >Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+      </div>
+    </div>
+
+
+    <div class="media" style="width: 60%;position: relative;left:40%;">
+      <div class="media-body">
+        <h4 class="media-heading" >John Doe <small><i>Posted on February 19, 2016</i></small></h4>
+        <p >Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+      </div>
+      <div class="media-right">
+        <img src="https://www.w3schools.com/w3css/img_avatar3.png" class="media-object" style="width:45px">
+      </div>
+    </div>
+
+
+
+
+
      </div>
       <div>
          <!--Message control-->
@@ -141,6 +172,7 @@
     </div>
   </div>
 
+  <div style="display: none;" id='testingmessage'></div>
 
   <!-- Modal -->
   <div class="modal fade" id="myModal" role="dialog">
@@ -292,6 +324,8 @@ $('document').ready(function(){
 $('#sendmessage').click(function(){
   var message=$('#message').val();
   var group=$("#messagetitle").text();
+  message=replaceAll(message,'<','&lt');
+  message=replaceAll(message,'>','&gt');
   if(message==''){
     alert('Can not send empty message!');
   }
@@ -315,14 +349,19 @@ $('document').ready(function(){
   setInterval(function(){
     if($('#messagetitle').html()!='Quick Chat'){
       var group=$('#messagetitle').html();
+      var content=$('#testing').html();
       $.ajax({
       url:'messageupdate.php',
       data:{'group':group},
       dataType:'text',
       success:function(data){
-        $('#testing').html(data);
-        var objDiv = document.getElementById("testing");
-        objDiv.scrollTop = objDiv.scrollHeight;
+        $('#testingmessage').html(data);
+        var content2=$('#testingmessage').html();
+        if(content!=content2){
+          $('#testing').html(data);
+          var objDiv = document.getElementById("testing");
+          objDiv.scrollTop = objDiv.scrollHeight;
+        }
       },
       type:'POST'
     });
@@ -330,7 +369,10 @@ $('document').ready(function(){
 },500);
 });
 
-
+//replace all function for cross site attacking
+function replaceAll(str, find, replace) {
+    return str.replace(new RegExp(find, 'g'), replace);
+}
 </script>
 </html>
 

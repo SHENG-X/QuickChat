@@ -1,6 +1,7 @@
 <?php
 include('classes/Login.php');
-$userid=Login::isLoggedin();
+if(Login::isLoggedin()){
+	$userid=Login::isLoggedin();
 $username=DB::query('SELECT username FROM user WHERE id=:id',array(':id'=>$userid))[0]['username'];
 $dob=DB::query('SELECT dob FROM user WHERE id=:id',array(':id'=>$userid))[0]['dob'];
 $gender=DB::query('SELECT gender FROM user WHERE id=:id',array(':id'=>$userid))[0]['gender'];
@@ -35,10 +36,10 @@ switch ($country) {
         break;
 }
 
-
-
-
-
-
 echo "<table style='width: 100%''><tr><td>Name:</td><td>".$username."</td></tr><tr><td>Date of Birth:</td><td>".$dob."</td></tr><tr><td>Gender:</td><td>".$gender."</td></tr><tr><td>Country:</td><td>".$country."</td></tr><tr><td>Language:</td><td>".$language."</td></tr></table>";
+}
+else{
+	echo "<script>alert('Connection Error');</script>";
+}
+
 ?>

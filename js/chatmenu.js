@@ -176,3 +176,24 @@ $('#creategroup').click(function(){
     $('#createGroups').show();
 });
 
+
+//search control---------------------
+$("#search").keyup(function(){
+  searchgroup();
+});
+function searchgroup(){
+  var input,filter,ul,li,h4,i;
+  input=document.getElementById('search');
+  filter=input.value;
+  ul=document.getElementById('groups-list');
+  li=ul.getElementsByTagName('li');
+  for(i=0;i<li.length;i++){
+    h4=li[i].getElementsByTagName('h4')[0];
+    if(h4.innerHTML.indexOf(filter)>-1){
+      li[i].style.display='';
+    }else{
+            li[i].style.display='none';
+    }
+  }
+}
+//-----------------------------------

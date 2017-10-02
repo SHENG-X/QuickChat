@@ -16,10 +16,12 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <!-- Latest compiled JavaScript -->
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-  <script type="text/javascript">$.ajax({
+  <script type="text/javascript">
+  $.ajax({
   url:'insertgroup.php',
   dataType:'text',
   success:function(data){
+    if(data!=''){
     var groups=[];
     groups=data.split(',');
     grouplength=groups.length;
@@ -27,6 +29,8 @@
       var groupname="<li class='list-group-item' id='group"+i+"'><div class='col-xs-12 col-sm-4'><img  src='http://api.randomuser.me/portraits/men/49.jpg' alt='Scott Stevens' class='img-responsive img-circle'  style='display:block;' /></div><div class='col-xs-12 col-sm-8' ><h4 style='overflow-x: auto;'>%data%</h4></div><div class='clearfix'></div></li>";
       groupname=groupname.replace('%data%',groups[i]);
       $("#groups-list").append(groupname);
+    }
+
     }
   }
 });
@@ -77,7 +81,7 @@
       <div style='height:92vh;background: blue;padding: 0px' class='col-sm-10'>
         <ul class="list-group col-sm-12" id="groups-list">
           <!--Where group names goes-->
-          <li class="list-group-item">
+        <!--  <li class="list-group-item">
               <div class="col-xs-12 col-sm-4">
                   <img  src="http://api.randomuser.me/portraits/men/49.jpg" alt="Scott Stevens" class="img-responsive img-circle"  style="display:block;" />
               </div>
@@ -86,7 +90,7 @@
               </div>
               <div class="clearfix"></div>
           </li>
-         
+         -->
 
         </ul>
       </div>

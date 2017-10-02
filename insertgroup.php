@@ -7,4 +7,5 @@ foreach ($groupnames as $g) {
 	array_push($groups,$g['group_name']);
 }
 echo implode(',', $groups);
+
 ?>

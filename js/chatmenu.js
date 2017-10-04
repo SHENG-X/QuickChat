@@ -54,7 +54,7 @@ $('#signoutall').click(function(){
     $('#leavegroup').css('color','#999');
   });
   $('#leavegroup').mouseout(function(){
-    $('#leavegroups').css('color','#777');
+    $('#leavegroup').css('color','#777');
   });
 
   $("#upload-img").on('change', function () {

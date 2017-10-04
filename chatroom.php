@@ -26,9 +26,7 @@
     groups=data.split(',');
     grouplength=groups.length;
     for(i=0;i<grouplength;i++){
-      //var groupname="<li class='list-group-item' id='group"+i+"'><div class='col-xs-12 col-sm-4'><img  src='http://api.randomuser.me/portraits/men/49.jpg' alt='Scott Stevens' class='img-responsive img-circle'  style='display:block;' /></div><div class='col-xs-12 col-sm-8' ><h4 style='overflow-x: auto;'>%data%</h4></div><div class='clearfix'></div></li>";
-      var groupname="<li class='list-group-item' style='padding: 1.2vh'  id='group"+i+"'><div class='col-xs-12 col-sm-4' ><img  src='http://api.randomuser.me/portraits/men/49.jpg' alt='Scott Stevens' class='img-responsive img-circle'  style='display:block;height: 8vh;width: 8vh' /></div><div class='col-xs-12 col-sm-8' style='height: 8vh;text-align: left;'><h4 style='overflow-x: auto;padding: 0px;margin: 0px;position: relative;height: 4vh;top:2.5vh;font-size: 2.7vh'>%data%</h4></div><div class='clearfix'></div></li>";
-
+      var groupname="<li class='list-group-item' style='padding: 1.2vh'  id='group"+i+"'><div class='col-xs-12 col-sm-4' ><img  src='http://api.randomuser.me/portraits/men/49.jpg' alt='Scott Stevens' class='img-responsive img-circle'  style='display:block;height: calc(4vh + 2vw);width: calc(4vh + 2vw)' /></div><div class='col-xs-12 col-sm-8' style='height: 8vh;text-align: left;'><h4 style='overflow-x: auto;padding: 0px;margin: 0px;position: relative;height: 4vh;top:2.5vh;font-size: calc(1vh + 1vw)'>%data%</h4></div><div class='clearfix'></div></li>";
       groupname=groupname.replace('%data%',groups[i]);
       $("#groups-list").append(groupname);
     }
@@ -94,7 +92,7 @@
          <hr>
         <i class="fa fa-search" style="font-size:36px;position:relative;left: calc(50% - 18px);color: #777" title='Look up user info' id='lookupusers' data-toggle="modal" data-target="#myModal2"></i>
         <hr>
-        <i class="fa fa-chain-broken" style="font-size:36px;position:relative;left: calc(50% - 18px);color: #777" title='Leave a group' id='leavegroup' ></i>
+        <i class="fa fa-chain-broken" style="font-size:36px;position:relative;left: calc(50% - 18px);color: #777" title='Leave a group' id='leavegroup' data-toggle="modal" data-target="#myModal3"></i>
       </div>
       <div style='height:92vh;padding: 0px;border-right: 1px solid #aaa' class='col-sm-10'>
         <ul class="list-group col-sm-12" id="groups-list" style="background:white;">
@@ -119,7 +117,7 @@
   <div class='col-sm-9' style='height: 100vh;padding: 0px;'>
     <div id ='cover' style="width: 100%;height: 100vh;position:fixed;background: white;z-index: 99;background-image: url('http://www.powerpointhintergrund.com/uploads/2017/06/simple-backgrounds-pictures-wallpaper-cave-1.jpeg');background-size: cover;"></div>
 
-     <div style='height:8vh;background: white;text-align: center;display: table-cell;vertical-align: middle;' class="col-sm-12"><h4 ><span id='messagetitle'>Quick Chat</span></h4></div>
+     <div style='height:8vh;text-align: center;border-bottom: 1px solid #eee' class="col-sm-12"><h4 style="margin-top: 2vh;"><span id='messagetitle'>Quick Chat</span></h4></div>
     
      <div id='testing' style="height: 80vh;overflow-y: auto;overflow-x: hidden; padding: 0px;" class="col-sm-12" >
       <!--Where message goes-->
@@ -127,7 +125,7 @@
 
       <div>
          <!--Message control-->
-         <form style='height:12vh;background: red;position:absolute;bottom: 0px;z-index: 10;width: 100%'>
+         <form style='height:12vh;position:absolute;bottom: 0px;z-index: 10;width: 100%'>
           <div class="form-group" >
             <textarea  style='height:100%;resize: none;display:inline-block;position: absolute;left:0px;width:90%;margin:0px;padding: 0px' id='message'></textarea>
             <div class="input-group-btn" style="display: inline-block; background: green;position: absolute;width: 10%;height:12vh;position: absolute;z-index: 10;right: 0px">
@@ -219,7 +217,7 @@
       <div class="modal-content">
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <h4 class="modal-title">My Info</h4>
+          <h4 class="modal-title">Info Lookup</h4>
         </div>
         <div class="modal-body" style="text-align: center;">
           <div id='profile_info'>
@@ -240,6 +238,30 @@
       </div>
     </div>
   </div>
+
+  <!--Leave group user modal window-->
+  <div class="modal fade" id="myModal3" role="dialog">
+    <div class="modal-dialog modal-sm">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Leave Group</h4>
+        </div>
+        <div class="modal-body" style="text-align: center;">
+          <h5>Enter Group Name to Leave the Group</h5>
+          <!--Only allow user to look up other user info if they are in the same group-->
+          <input type="text" id='group-name' placeholder="Group Name" class="form-control"> <input type="button" id='groupname_control' value="Leave" class="btn btn-default">
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+
 </body>
 <script type="text/javascript" src="js/csscontrol.js"></script>
 <script type="text/javascript" src='js/chatmenu.js'></script>
@@ -465,10 +487,22 @@ $('#lookupname').click(function(){
 
 
 
+$('#groupname_control').click(function(){
+    var groupname=$('#group-name').val();
+    $('#group-name').val('');
+    if(groupname!=''){
+      $.ajax({
+        url:'leavegroup.php',
+        data:{'groupname':groupname},
+        dataType:'text',
+        success:function(data){
+          location.reload();
+        },
+        type:'POST'
+      });
 
-
-
-
+    }
+});
 
 
 

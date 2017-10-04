@@ -26,7 +26,7 @@
     groups=data.split(',');
     grouplength=groups.length;
     for(i=0;i<grouplength;i++){
-      var groupname="<li class='list-group-item' style='padding: 1.2vh'  id='group"+i+"'><div class='col-xs-12 col-sm-4' ><img  src='http://api.randomuser.me/portraits/men/49.jpg' alt='Scott Stevens' class='img-responsive img-circle'  style='display:block;height: calc(4vh + 2vw);width: calc(4vh + 2vw)' /></div><div class='col-xs-12 col-sm-8' style='height: 8vh;text-align: left;'><h4 style='overflow-x: auto;padding: 0px;margin: 0px;position: relative;height: 4vh;top:2.5vh;font-size: calc(1vh + 1vw)'>%data%</h4></div><div class='clearfix'></div></li>";
+      var groupname="<li class='list-group-item' style='padding: 1.2vh'  id='group"+i+"'><div class='col-xs-12 col-sm-4' ><img  src='http://files.livechattools.webnode.com/200000508-ac725af604/live-chat-team.png' alt='Profile Image' class='img-responsive img-circle'  style='display:block;height: calc(4vh + 2vw);width: calc(4vh + 2vw)' /></div><div class='col-xs-12 col-sm-8' style='height: 8vh;text-align: left;'><h4 style='overflow-x: auto;padding: 0px;margin: 0px;position: relative;height: 4vh;top:2.5vh;font-size: calc(1vh + 1vw)'>%data%</h4></div><div class='clearfix'></div></li>";
       groupname=groupname.replace('%data%',groups[i]);
       $("#groups-list").append(groupname);
     }
@@ -221,13 +221,13 @@
         </div>
         <div class="modal-body" style="text-align: center;">
           <div id='profile_info'>
-            <table style="width: 100%">
+            <!-- <table style="width: 100%">
               <tr><td>Name:</td><td>Miky Don</td></tr>
               <tr><td>Date of Birth:</td><td>Jul. 12,1988</td></tr>
               <tr><td>Gender:</td><td>Female</td></tr>
               <tr><td>Country:</td><td>Canada</td></tr>
               <tr><td>Language:</td><td>English</td></tr>
-            </table>
+            </table> -->
           </div>
           <!--Only allow user to look up other user info if they are in the same group-->
           <input type="text" id='user-name' placeholder="Username" class="form-control"> <input type="button" id='lookupname' value="Lookup" class="btn btn-default">
@@ -270,28 +270,33 @@
   $('#hl').hide();
   $("#create").click(function(){
     var groupname=$('#createg').val();
-    $("#createg").val("");
-    if(groupname.length>3){
-      $.ajax({
-        url:'creategroup.php',
-        data:{'groupname':groupname},
-        dataType:'text',
-        success:function(data){
-          if(data==0){
-            $('#hl').show();
-            $('#hl').html('<strong>Warning: </strong> Group name taken');
-          }
-          else{
-            alert('Group Created!');
-            location.reload();
-          }
-        },
-        type:'POST'
-      });
+    if(groupname.length<32&&groupname.indexOf('>')<0&&groupname.indexOf('<')<0){
+      $("#createg").val("");
+      if(groupname.length>3){
+        $.ajax({
+          url:'creategroup.php',
+          data:{'groupname':groupname},
+          dataType:'text',
+          success:function(data){
+            if(data==0){
+              $('#hl').show();
+              $('#hl').html('<strong>Warning: </strong> Group name taken');
+            }
+            else{
+              alert('Group Created!');
+              location.reload();
+            }
+          },
+          type:'POST'
+        });
+      }
+      else{
+        $('#hl').show();
+        $('#hl').html('<strong>Warning: </strong> Invalid group name');
+      }
     }
     else{
-      $('#hl').show();
-      $('#hl').html('<strong>Warning: </strong> Invalid group name');
+            alert('Forbidden!');
     }    
   });
   $('#createg').click(function(){

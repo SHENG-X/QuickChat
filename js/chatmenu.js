@@ -44,6 +44,18 @@ $('#signoutall').click(function(){
   $('#setting').mouseout(function(){
     $('#setting').css('color','#777');
   });
+  $('#lookupusers').mouseover(function(){
+    $('#lookupusers').css('color','#999');
+  });
+  $('#lookupusers').mouseout(function(){
+    $('#lookupusers').css('color','#777');
+  });
+   $('#leavegroup').mouseover(function(){
+    $('#leavegroup').css('color','#999');
+  });
+  $('#leavegroup').mouseout(function(){
+    $('#leavegroups').css('color','#777');
+  });
 
   $("#upload-img").on('change', function () {
      //Get count of selected files

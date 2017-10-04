@@ -26,7 +26,9 @@
     groups=data.split(',');
     grouplength=groups.length;
     for(i=0;i<grouplength;i++){
-      var groupname="<li class='list-group-item' id='group"+i+"'><div class='col-xs-12 col-sm-4'><img  src='http://api.randomuser.me/portraits/men/49.jpg' alt='Scott Stevens' class='img-responsive img-circle'  style='display:block;' /></div><div class='col-xs-12 col-sm-8' ><h4 style='overflow-x: auto;'>%data%</h4></div><div class='clearfix'></div></li>";
+      //var groupname="<li class='list-group-item' id='group"+i+"'><div class='col-xs-12 col-sm-4'><img  src='http://api.randomuser.me/portraits/men/49.jpg' alt='Scott Stevens' class='img-responsive img-circle'  style='display:block;' /></div><div class='col-xs-12 col-sm-8' ><h4 style='overflow-x: auto;'>%data%</h4></div><div class='clearfix'></div></li>";
+      var groupname="<li class='list-group-item' style='padding: 1.2vh'  id='group"+i+"'><div class='col-xs-12 col-sm-4' ><img  src='http://api.randomuser.me/portraits/men/49.jpg' alt='Scott Stevens' class='img-responsive img-circle'  style='display:block;height: 8vh;width: 8vh' /></div><div class='col-xs-12 col-sm-8' style='height: 8vh;text-align: left;'><h4 style='overflow-x: auto;padding: 0px;margin: 0px;position: relative;height: 4vh;top:2.5vh;font-size: 2.7vh'>%data%</h4></div><div class='clearfix'></div></li>";
+
       groupname=groupname.replace('%data%',groups[i]);
       $("#groups-list").append(groupname);
     }
@@ -90,20 +92,23 @@
         <hr>
         <i class="fa fa-plus-circle" style="font-size:36px;position:relative;left: calc(50% - 18px);color: #777" title='Add Group' id='addgroup' data-toggle="modal" data-target="#myModal"></i>
          <hr>
-        <i class="fa fa-search" style="font-size:36px;position:relative;left: calc(50% - 18px);color: #777" title='Look up user info' id='lookup' data-toggle="modal" data-target="#myModal2"></i>
+        <i class="fa fa-search" style="font-size:36px;position:relative;left: calc(50% - 18px);color: #777" title='Look up user info' id='lookupusers' data-toggle="modal" data-target="#myModal2"></i>
+        <hr>
+        <i class="fa fa-chain-broken" style="font-size:36px;position:relative;left: calc(50% - 18px);color: #777" title='Leave a group' id='leavegroup' ></i>
       </div>
       <div style='height:92vh;padding: 0px;border-right: 1px solid #aaa' class='col-sm-10'>
         <ul class="list-group col-sm-12" id="groups-list" style="background:white;">
           <!--Where group names goes-->
-        <!--  <li class="list-group-item">
-              <div class="col-xs-12 col-sm-4">
-                  <img  src="http://api.randomuser.me/portraits/men/49.jpg" alt="Scott Stevens" class="img-responsive img-circle"  style="display:block;" />
+       
+      <!--   <li class='list-group-item' style='padding: 3px'>
+              <div class='col-xs-12 col-sm-4' >
+                  <img  src='http://api.randomuser.me/portraits/men/49.jpg" alt="Scott Stevens" class="img-responsive img-circle'  style='display:block;height: 8vh;width: 8vh' />
               </div>
-              <div class="col-xs-12 col-sm-8" >
-                <h4 style="overflow-x: auto;">Testing Group</h4>
+              <div class='col-xs-12 col-sm-8' style='height: 8vh;text-align: left;'>
+                <h4 style='overflow-x: auto;padding: 0px;margin: 0px;position: relative;height: 4vh;top:2.5vh;font-size: 2.7vh'>Testing Group</h4>
               </div>
-              <div class="clearfix"></div>
-          </li>
+              <div class='clearfix'></div>
+          </li> 
          -->
 
         </ul>
@@ -116,7 +121,7 @@
 
      <div style='height:8vh;background: white;text-align: center;display: table-cell;vertical-align: middle;' class="col-sm-12"><h4 ><span id='messagetitle'>Quick Chat</span></h4></div>
     
-     <div id='testing' style="height: 80vh;overflow-y: auto;overflow-x: hidden; padding: 0px" class="col-sm-12" >
+     <div id='testing' style="height: 80vh;overflow-y: auto;overflow-x: hidden; padding: 0px;" class="col-sm-12" >
       <!--Where message goes-->
      </div>
 
@@ -183,18 +188,18 @@
                &nbsp&nbsp&nbsp&nbsp&nbspNew Password: <input id="newpassword" type="password" name="newpassword" placeholder="new password" class="form-control"/><br><br>
               Confirm Password: <input id="confirmpassword" type="password" name="confirmpassword" placeholder="confirm password" class="form-control"/><br><br>
               <p id='indicator' style='color: red'><p>
-              <input  type="submit"  id='submiting2' value='Confirm'>
+              <input  type="submit"  id='submiting2' value='Confirm' class="btn btn-default">
             </div>
 
             <div  id='createGroups' style="display: none">
-              Group Name:<input type="text" name="contact" id='createg' placeholder="Group Name">
-              <input type="submit"  value="Create" id='create'>
+              Group Name: <input type="text" name="contact" id='createg' class="form-control" placeholder="Group Name">
+              <input type="submit"  value="Create" id='create' class="btn btn-default">
               <p id='hl' style="color: red"></p>
             </div>
 
             <div  id='addgroups' style="display: none">
-              Add Group:<input type="text" name="contact" id='add-group' placeholder="Group Name">
-              <input type="submit"  value="Add Group" id='add'>
+              Add Group: <input type="text" name="contact" id='add-group' class="form-control" placeholder="Group Name">
+              <input type="submit"  value="Add Group" id='add' class="btn btn-default">
               <p id='addwarning' style="color: red"></p>
             </div>
 
@@ -226,9 +231,8 @@
               <tr><td>Language:</td><td>English</td></tr>
             </table>
           </div>
-          <hr>
-          Enter Username:
-          <input type="text" id='user-name' placeholder="Username"><input type="button" id='lookupname' value="Lookup">
+          <!--Only allow user to look up other user info if they are in the same group-->
+          <input type="text" id='user-name' placeholder="Username" class="form-control"> <input type="button" id='lookupname' value="Lookup" class="btn btn-default">
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -389,9 +393,6 @@ $('#message').keydown(function (e){
     }
 })
 
-
-
-
 //message feedback display control
 $('document').ready(function(){
   setInterval(function(){
@@ -417,10 +418,62 @@ $('document').ready(function(){
 },500);
 });
 
+$('document').ready(function(){
+  setInterval(function(){
+    $.ajax({
+      url:'kick.php',
+      success:function(data){
+        if(data==0){
+          location.reload();
+        }
+        if(!$('#myModal2').is(':visible')&&$('#profile_info').html()!=''){
+            $('#profile_info').html('');
+        }
+      }
+    });
+  
+  },500);
+});
+
 //replace all function for cross site attacking
 function replaceAll(str, find, replace) {
     return str.replace(new RegExp(find, 'g'), replace);
 }
+
+//look up user info
+$('#lookupname').click(function(){
+  var username=$('#user-name').val();
+  $('#user-name').val('');
+  $.ajax({
+    url:'checkuserinfo.php',
+    data:{'username':username},
+    dataType:'text',
+    success:function(data){
+      if(data!=0){
+        $('#profile_info').html(data);
+
+      }
+      else{
+        alert('Forbidden!');
+      }
+    },
+    type:'POST'
+  });
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 </script>
 </html>
 

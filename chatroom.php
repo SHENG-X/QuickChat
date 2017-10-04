@@ -496,7 +496,12 @@ $('#groupname_control').click(function(){
         data:{'groupname':groupname},
         dataType:'text',
         success:function(data){
-          location.reload();
+          if(data=='Success!'){
+            location.reload();
+          }
+          else{
+            alert(data);
+          }
         },
         type:'POST'
       });

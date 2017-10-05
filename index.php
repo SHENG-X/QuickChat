@@ -4,7 +4,7 @@
   <?php
     include ('classes/Login.php');
     if(!Login::isLoggedin()){
-      header('Location:index.html');
+      header('Location:login.html');
     }
   ?>
   <!-- Latest compiled and minified CSS -->

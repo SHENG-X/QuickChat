@@ -91,21 +91,22 @@ $('#signoutall').click(function(){
 //upload img to php
  $('#imgupload').on('submit',(function(e) {
         e.preventDefault();
-        var formData = new FormData(this);
-
+        var url=$('#upload-img').val();
+        $('#upload-img').val('');
         $.ajax({
             type:'POST',
             url: $(this).attr('action'),
-            data:formData,
-            cache:false,
-            contentType: false,
-            processData: false,
+            data:{'url':url},
+            dataType:'text',
             success:function(data){
-              alert(data);
+              if(data==1){
+                alert('Success!');
+              }
+              else{
+                alert('Not a Image Forbidden!');
+              }
             },
-            error: function(data){
-              alert(data);
-            }
+            type:'POST'
         });
     }));
 

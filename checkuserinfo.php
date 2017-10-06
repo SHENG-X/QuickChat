@@ -43,8 +43,13 @@ if(DB::query('SELECT id FROM user WHERE username=:username',array(':username'=>$
 						        $country='USA';
 						        break;
 						}
-
-						echo "<table style='width: 100%''><tr><td>Name:</td><td>".$username."</td></tr><tr><td>Date of Birth:</td><td>".$dob."</td></tr><tr><td>Gender:</td><td>".$gender."</td></tr><tr><td>Country:</td><td>".$country."</td></tr><tr><td>Language:</td><td>".$language."</td></tr></table><hr>";
+						if(DB::query('SELECT img_url FROM profile_image WHERE userid=:userid',array(':userid'=>$user2search_id))){
+							$url=DB::query('SELECT img_url FROM profile_image WHERE userid=:userid',array(':userid'=>$user2search_id))[0]['img_url'];
+						}
+						else{
+							$url='https://www.w3schools.com/w3css/img_avatar3.png';
+						}
+						echo "<img src='".$url."' width='50%' height='100vh' class='img-circle'><br><br><table style='width: 100%''><tr><td>Name:</td><td>".$username."</td></tr><tr><td>Date of Birth:</td><td>".$dob."</td></tr><tr><td>Gender:</td><td>".$gender."</td></tr><tr><td>Country:</td><td>".$country."</td></tr><tr><td>Language:</td><td>".$language."</td></tr></table><hr>";
 						exit();
 					}
 				}		

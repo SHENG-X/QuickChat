@@ -174,11 +174,11 @@
         </div>
         <div class="modal-body"  style="text-align: center;">
           <div id="wrapper" >
-            <form  action='upload.php' method="post" enctype="multipart/form-data" id='imgupload' >
-              <input id="upload-img" type="file" name="fileToUpload" />
+            <form  action='upload.php' method="post" id='imgupload' >
+              Image URL: <input id="upload-img" type="text" name="fileToUpload" placeholder="URL" />
+              <input  type="submit"  id='submiting' value='Upload'>
               <div id="image-holder"></div>
               <br>
-              <input  type="submit"  id='submiting' value='Upload' style="display: none">
             </form>
 
             <div  id='changepassword'>

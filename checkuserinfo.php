@@ -47,9 +47,14 @@ if(DB::query('SELECT id FROM user WHERE username=:username',array(':username'=>$
 							$url=DB::query('SELECT img_url FROM profile_image WHERE userid=:userid',array(':userid'=>$user2search_id))[0]['img_url'];
 						}
 						else{
-							$url='https://www.w3schools.com/w3css/img_avatar3.png';
+							if($gender=='Male'){
+								$url='https://www.w3schools.com/w3css/img_avatar3.png';
+							}
+							else{
+								$url='https://www.w3schools.com/howto/img_avatar2.png';
+							}
 						}
-						echo "<img src='".$url."' width='50%' height='100vh' class='img-circle'><br><br><table style='width: 100%''><tr><td>Name:</td><td>".$username."</td></tr><tr><td>Date of Birth:</td><td>".$dob."</td></tr><tr><td>Gender:</td><td>".$gender."</td></tr><tr><td>Country:</td><td>".$country."</td></tr><tr><td>Language:</td><td>".$language."</td></tr></table><hr>";
+						echo "<img src='".$url."' width='40%' height='100vh' class='img-circle'><br><br><table style='width: 100%''><tr><td>Name:</td><td>".$username."</td></tr><tr><td>Date of Birth:</td><td>".$dob."</td></tr><tr><td>Gender:</td><td>".$gender."</td></tr><tr><td>Country:</td><td>".$country."</td></tr><tr><td>Language:</td><td>".$language."</td></tr></table><hr>";
 						exit();
 					}
 				}		

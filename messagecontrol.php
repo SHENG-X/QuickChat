@@ -1,6 +1,5 @@
 <?php
 include('classes/Login.php');
-include('classes/Controller.php');
 $group=$_POST['group'];
 $userid=Login::isLoggedin();
 if(isset($_POST['message'])){

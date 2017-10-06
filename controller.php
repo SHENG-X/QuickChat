@@ -1,16 +1,7 @@
 <?php
-include('classes/Login.php');
-include('classes/Controller.php');
-$group=$_POST['group'];
-$userid=Login::isLoggedin();
-if(isset($_POST['message'])){
-	$message=$_POST['message'];
-	$groupid=DB::query('SELECT id FROM groups WHERE group_name=:group_name',array(':group_name'=>$group))[0]['id'];
-DB::query('INSERT INTO chatroom(groupid,userid,message) VALUES(:groupid,:userid,:message)',array(':groupid'=>$groupid,':userid'=>$userid,':message'=>$message));
-}
-	$groupid=DB::query('SELECT id FROM groups WHERE group_name=:group_name',array(':group_name'=>$group))[0]['id'];
-$allmessage=DB::query('SELECT * FROM chatroom,user WHERE groupid=:groupid AND chatroom.userid=user.id',array(':groupid'=>$groupid));
-foreach($allmessage as $i){
+class Controller{
+	public static function msg_control(){
+		foreach($allmessage as $i){
 	if($i['userid']==$userid){
 		if(DB::query('SELECT img_url FROM profile_image WHERE userid=:userid',array(':userid'=>$userid))){
 			$url=DB::query('SELECT img_url FROM profile_image WHERE userid=:userid',array(':userid'=>$userid))[0]['img_url'];
@@ -42,6 +33,7 @@ foreach($allmessage as $i){
 		echo "<div class=\"media\" style=\"width:100%;\"> <div class=\"media-left\"><img class='img-circle' src='".$url."' class=\"media-object\" style=\"width:45px;height:45px\"></div><div class=\"media-body\"><h4 class=\"media-heading\">".$i['username']."<small><i style='font-size:9px'> (".$i['time'].")</i></small></h4><hr style='margin:0px;'><p style='width: 30vw;text-align:left'>".$i['message']."</p></div></div>";
 	}
 }
+	}
 
-
+}
 ?>

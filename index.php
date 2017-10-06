@@ -175,8 +175,8 @@
         <div class="modal-body"  style="text-align: center;">
           <div id="wrapper" >
             <form  action='upload.php' method="post" id='imgupload' >
-              Image URL: <input id="upload-img" type="text" name="fileToUpload" placeholder="URL" />
-              <input  type="submit"  id='submiting' value='Upload'>
+              Image URL: <input id="upload-img" type="text" name="fileToUpload" placeholder="URL" class="form-control" />
+              <input  type="submit"  id='submiting' value='Upload'  class="btn btn-default">
               <div id="image-holder"></div>
               <br>
             </form>

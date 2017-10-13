@@ -207,7 +207,6 @@ $("#username").change(function(){
             $("#dob-dd").css('border-radius','4px');
         }
         else{
-          if(username==''||password==''||email==''||dobdd==''||dobmm==''||dobyy=='')
           $.ajax({
               url:"register.php",
               data:{'signup':1,'username2':username,'password2':password,'email2':email,'dobdd':dobdd,'dobmm':dobmm,'dobyy':dobyy,'gender':gender,'language':language,'country':country},

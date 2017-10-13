@@ -101,6 +101,13 @@ $("#username").change(function(){
               $('#dob-warning').show();
               $('#dob-yy').val('');
             }
+            else if(data!=2){
+              if($('#dob-mm').val()==2){
+                if($('#dob-dd').val()==29){
+                  $('#dob-dd').val('');
+                }
+              }
+            }
         },
         type:'POST'
         });

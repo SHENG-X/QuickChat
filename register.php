@@ -65,7 +65,16 @@ if(isset($_POST['dob-yy'])){
 			echo 0;
 		}
 		else{
-			echo 1;
+			if($yy%4==0){
+				echo 2;
+			}
+			else if ($yy%100==0&&$yy%400==0){
+				echo 2;
+
+			}
+			else{
+				echo 1;
+			}
 		}
 }
 

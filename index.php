@@ -376,7 +376,7 @@ $('#sendmessage').click(function(){
   var group=$("#messagetitle").text();
   message=replaceAll(message,'<','&lt');
   message=replaceAll(message,'>','&gt');
-  if(message==''){
+  if(message==''||message.trim().length==0){
     alert('Can not send empty message!');
   }
   else{

@@ -192,7 +192,11 @@ $("#username").change(function(){
         $("#dob-yy").css('border','1px solid red');
         $("#dob-yy").css('border-radius','4px');
       }
-
+      if(dobyy%4!=0&&(dobyy%100!=0&&dobyy%400!=0)&&dobmm==2&&dobdd>28){
+            $("#dob-dd").val('');
+            $("#dob-dd").css('border','1px solid red');
+            $("#dob-dd").css('border-radius','4px');
+        }
       if(gender&&language){
         var username=$('#username').val();
         var password=$("#password").val();

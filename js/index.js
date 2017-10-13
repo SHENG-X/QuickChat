@@ -101,13 +101,6 @@ $("#username").change(function(){
               $('#dob-warning').show();
               $('#dob-yy').val('');
             }
-            else if(data!=2){
-              if($('#dob-mm').val()==2){
-                if($('#dob-dd').val()==29){
-                  $('#dob-dd').val('');
-                }
-              }
-            }
         },
         type:'POST'
         });
@@ -207,25 +200,34 @@ $("#username").change(function(){
         var dobdd=$("#dob-dd").val();
         var dobmm=$("#dob-mm").val();
         var dobyy=$("#dob-yy").val();
-        $.ajax({
-          url:"register.php",
-          data:{'signup':1,'username2':username,'password2':password,'email2':email,'dobdd':dobdd,'dobmm':dobmm,'dobyy':dobyy,'gender':gender,'language':language,'country':country},
-          dataType:'text',
-          success: function(data){
-            if(data==1){
-              $(location).attr('href','index.html');
-              $('input').val('');
-              $('#sign-up').val('Sign Up');
-              $(':radio').each(function () {
-                $(this).removeAttr('checked');
-                $('input[type="radio"]').prop('checked', false);
-                });
-            }else{
-              alert('Please complete the form!');
-            }
-          },
-          type:'POST'
-        });
+        
+        if(dobyy%4!=0&&(dobyy%100!=0&&dobyy%400!=0)&&dobmm==2&&dobdd>28){
+            $("#dob-dd").val('');
+            $("#dob-dd").css('border','1px solid red');
+            $("#dob-dd").css('border-radius','4px');
+        }
+        else{
+          if(username==''||password==''||email==''||dobdd==''||dobmm==''||dobyy=='')
+          $.ajax({
+              url:"register.php",
+              data:{'signup':1,'username2':username,'password2':password,'email2':email,'dobdd':dobdd,'dobmm':dobmm,'dobyy':dobyy,'gender':gender,'language':language,'country':country},
+              dataType:'text',
+              success: function(data){
+                if(data==1){
+                  $(location).attr('href','index.php');
+                  $('input').val('');
+                  $('#sign-up').val('Sign Up');
+                  $(':radio').each(function () {
+                    $(this).removeAttr('checked');
+                    $('input[type="radio"]').prop('checked', false);
+                    });
+                }else{
+                  alert('Please complete the form!');
+                }
+              },
+              type:'POST'
+            });
+        }
       }
     }
     else{

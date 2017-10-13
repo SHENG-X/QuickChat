@@ -65,16 +65,7 @@ if(isset($_POST['dob-yy'])){
 			echo 0;
 		}
 		else{
-			if($yy%4==0){
-				echo 2;
-			}
-			else if ($yy%100==0&&$yy%400==0){
-				echo 2;
-
-			}
-			else{
-				echo 1;
-			}
+			echo 1;
 		}
 }
 
@@ -89,9 +80,12 @@ if(isset($_POST['signup'])){
      $gender=$_POST['gender'];
      $language=$_POST['language'];
      $country=$_POST['country'];
-	if(DB::query("INSERT INTO user (username, password, email, dob, gender, language, country) VALUES (:username, :password, :email, :dob, :gender, :language, :country)",array(':username'=>$username,":password"=>password_hash($password,PASSWORD_BCRYPT),":email"=>$email,":dob"=>$dateOfBirth,":gender"=>$gender,":language"=>$language,":country"=>$country))){
-	}
-			echo 1;
+     if(!empty($username)&&!empty($password)&&!empty($email)&&!empty($dobdd)&&!empty($dobmm)&&!empty($dobyy)){
+     	if(DB::query("INSERT INTO user (username, password, email, dob, gender, language, country) VALUES (:username, :password, :email, :dob, :gender, :language, :country)",array(':username'=>$username,":password"=>password_hash($password,PASSWORD_BCRYPT),":email"=>$email,":dob"=>$dateOfBirth,":gender"=>$gender,":language"=>$language,":country"=>$country))){
+     					echo 1;
+
+		}
+     }
 }
 
 ?>

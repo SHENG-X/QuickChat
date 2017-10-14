@@ -237,3 +237,256 @@ $("#username").change(function(){
       alert('Plase check the Privacy terms & Conditions confirm that you agreed with the terms.');
     }
   });
+
+
+
+// create group control
+  $('#hl').hide();
+  $("#create").click(function(){
+    var groupname=$('#createg').val();
+    if(groupname.length<32&&groupname.indexOf('>')<0&&groupname.indexOf('<')<0){
+      $("#createg").val("");
+      if(groupname.length>3){
+        $.ajax({
+          url:'creategroup.php',
+          data:{'groupname':groupname},
+          dataType:'text',
+          success:function(data){
+            if(data==0){
+              $('#hl').show();
+              $('#hl').html('<strong>Warning: </strong> Group name taken');
+            }
+            else{
+              alert('Group Created!');
+              location.reload();
+            }
+          },
+          type:'POST'
+        });
+      }
+      else{
+        $('#hl').show();
+        $('#hl').html('<strong>Warning: </strong> Invalid group name');
+      }
+    }
+    else{
+            alert('Forbidden!');
+    }    
+  });
+  $('#createg').click(function(){
+      $('#hl').hide();
+  });
+  //end of create group control
+
+  $('#addgroup').click(function(){
+    $('#createGroups').hide();
+    $("#imgupload").hide();
+    $('#mtitle').text('Add a Group');
+    $("#changepassword").hide();
+    $('#addgroups').show();
+  });
+
+  $('#add-group').click(function(){
+    $('#addwarning').html("");
+  });
+
+  $("#add").click(function(){
+    var groupname=$('#add-group').val();
+    if(groupname.length<3){
+      $("#addwarning").html('<strong>Warning: </strong> Invalid group name');
+    }
+    else{
+      $.ajax({
+        url:'addgroup.php',
+        data:{'groupname':groupname},
+        dataType:'text',
+        success:function(data){
+          if(data==0){
+            $("#addwarning").html('<strong>Warning: </strong>Group was not find');
+          }
+          else if(data=='Success!'){
+            location.reload();
+          }
+          else{alert(data);}
+        },
+        type:'POST'
+      });
+    }
+  });
+
+
+$('document').ready(function(){
+  $('li').click(function(){
+    $("#cover").hide();
+    var targetvar='#'+this.id+' h4';
+    $("#messagetitle").text($(targetvar).text());
+    var group=$("#messagetitle").text();
+    $('#testing').html('');
+    $.ajax({
+      url:'messagecontrol.php',
+      data:{'group':group},
+      dataType:'text',
+      success:function(data){
+        $('#testing').html(data);
+        var objDiv = document.getElementById("testing");
+        objDiv.scrollTop = objDiv.scrollHeight;
+      },
+      type:'POST'
+    });
+});
+});
+
+//right side profile control
+  $.ajax({
+  url:'ownerprofile.php',
+  success:function(data){
+    $('#profile_info').html(data);
+  }
+});
+
+//send message control
+$('#sendmessage').click(function(){
+  var message=$('#message').val();
+  var group=$("#messagetitle").text();
+  message=replaceAll(message,'<','&lt');
+  message=replaceAll(message,'>','&gt');
+  if(message==''||message.trim().length==0){
+    alert('Can not send empty message!');
+  }
+  else{
+    $.ajax({
+      url:'messagecontrol.php',
+      data:{'group':group,'message':message},
+      dataType:'text',
+      success:function(data){
+        $('#testing').html(data);
+        var objDiv = document.getElementById("testing");
+        objDiv.scrollTop = objDiv.scrollHeight;
+        $('#message').val('');
+      },
+      type:'POST'
+    });
+  }
+});
+$('#message').keydown(function (e){
+    if(e.keyCode == 13){
+      var message=$('#message').val();
+  var group=$("#messagetitle").text();
+  message=replaceAll(message,'<','&lt');
+  message=replaceAll(message,'>','&gt');
+  if(message==''){
+    alert('Can not send empty message!');
+  }
+  else{
+    $.ajax({
+      url:'messagecontrol.php',
+      data:{'group':group,'message':message},
+      dataType:'text',
+      success:function(data){
+        $('#testing').html(data);
+        var objDiv = document.getElementById("testing");
+        objDiv.scrollTop = objDiv.scrollHeight;
+        $('#message').val('');
+      },
+      type:'POST'
+    });
+  }
+    }
+})
+
+//message feedback display control
+$('document').ready(function(){
+  setInterval(function(){
+    if($('#messagetitle').html()!='Quick Chat'){
+      var group=$('#messagetitle').html();
+      var content=$('#testing').html();
+      $.ajax({
+      url:'messageupdate.php',
+      data:{'group':group},
+      dataType:'text',
+      success:function(data){
+        $('#testingmessage').html(data);
+        var content2=$('#testingmessage').html();
+        if(content!=content2){
+          $('#testing').html(data);
+          var objDiv = document.getElementById("testing");
+          objDiv.scrollTop = objDiv.scrollHeight;
+        }
+      },
+      type:'POST'
+    });
+  }
+},500);
+});
+
+$('document').ready(function(){
+  setInterval(function(){
+    $.ajax({
+      url:'kick.php',
+      success:function(data){
+        if(data==0){
+          location.reload();
+        }
+        if(!$('#myModal2').is(':visible')&&$('#profile_info').html()!=''){
+            $('#profile_info').html('');
+        }
+      }
+    });
+  
+  },500);
+});
+
+//replace all function for cross site attacking
+function replaceAll(str, find, replace) {
+    return str.replace(new RegExp(find, 'g'), replace);
+}
+
+//look up user info
+$('#lookupname').click(function(){
+  var username=$('#user-name').val();
+  $('#user-name').val('');
+  $.ajax({
+    url:'checkuserinfo.php',
+    data:{'username':username},
+    dataType:'text',
+    success:function(data){
+      if(data!=0){
+        $('#profile_info').html(data);
+
+      }
+      else{
+        alert('Forbidden!');
+      }
+    },
+    type:'POST'
+  });
+});
+
+
+
+
+
+$('#groupname_control').click(function(){
+    var groupname=$('#group-name').val();
+    $('#group-name').val('');
+    if(groupname!=''){
+      $.ajax({
+        url:'leavegroup.php',
+        data:{'groupname':groupname},
+        dataType:'text',
+        success:function(data){
+          if(data=='Success!'){
+            location.reload();
+          }
+          else{
+            alert(data);
+          }
+        },
+        type:'POST'
+      });
+
+    }
+});
+
+
+

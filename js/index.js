@@ -225,6 +225,7 @@ $("#username").change(function(){
                     $('input[type="radio"]').prop('checked', false);
                     });
                 }else{
+                  alert(data);
                   alert('Please complete the form!');
                 }
               },

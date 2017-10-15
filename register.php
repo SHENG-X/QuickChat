@@ -83,7 +83,7 @@ if(isset($_POST['signup'])){
      if(!empty($username)&&!empty($password)&&!empty($email)&&!empty($dobdd)&&!empty($dobmm)&&!empty($dobyy)){
      	if(DB::query("INSERT INTO user (username, password, email, dob, gender, language, country) VALUES (:username, :password, :email, :dob, :gender, :language, :country)",array(':username'=>$username,":password"=>password_hash($password,PASSWORD_BCRYPT),":email"=>$email,":dob"=>$dateOfBirth,":gender"=>$gender,":language"=>$language,":country"=>$country))){
 		}
-		     					echo 1;
+		echo 1;
      }
 }
 

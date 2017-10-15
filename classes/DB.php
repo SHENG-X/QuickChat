@@ -1,7 +1,7 @@
 <?php
 class DB{
 	public static function connect(){
-		$pdo=new PDO('mysql:host=localhost;dbname=quickchat;charset=utf8','root','12345');
+		$pdo=new PDO('mysql:host=localhost;dbname=COMP3540_sxiao;charset=utf8','sxiao','sxiao');
 		$pdo->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
 		return $pdo;
 

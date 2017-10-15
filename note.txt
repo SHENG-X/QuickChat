@@ -1,0 +1,4 @@
+login, register, findpassword layout need to be changed
+
+
+notification function can be added

@@ -400,7 +400,7 @@ $('#message').keydown(function (e){
   var group=$("#messagetitle").text();
   message=replaceAll(message,'<','&lt');
   message=replaceAll(message,'>','&gt');
-  if(message==''){
+  if(message==''||message.trim()==''){
     alert('Can not send empty message!');
   }
   else{

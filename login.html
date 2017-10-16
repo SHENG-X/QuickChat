@@ -21,8 +21,12 @@
   body{
     background: url('bk.jpg');
     background-size: cover;
+	background-position: center center;
     background-repeat: no-repeat;
+    background-attachment: fixed;
+	
   }
+  
   </style>
 </head>
 
@@ -35,7 +39,8 @@
   </div>
   <form>
     <div class="row">
-      <h1 style="text-align: center;">Log In</h1>
+      
+	  <h1 style="text-align: center;">Log In</h1>
       <div class="input-group input-group-icon">
         <input type="text" placeholder="Username Name" id='username'/>
         <div class="input-icon"><i class="fa fa-user"></i></div>
@@ -45,6 +50,7 @@
         <input type="password" placeholder="Password" id='password'/>
         <div class="input-icon"><i class="fa fa-key"></i></div>
       </div>
+	  
     </div>
     
     <div class="input-group">
@@ -53,6 +59,7 @@
         <p class="message">Not registered? <a href="register.html">Create an account</a> <b style="color: black">/</b> Forget Password? <a href="findmypassword.html">Find my password</a></p>
   </form>
 </div>
+
 <script type="text/javascript">
   $("#log-in").click(function(){
     var username=$("#username").val();

@@ -16,25 +16,23 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <!-- Latest compiled JavaScript -->
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-  <script type="text/javascript">
-  $.ajax({
-  url:'insertgroup.php',
-  dataType:'text',
-  success:function(data){
-    if(data!=''){
-    var groups=[];
-    groups=data.split(',');
-    grouplength=groups.length;
-    for(i=0;i<grouplength;i++){
-      var groupname="<li class='list-group-item' style='padding: 1.2vh'  id='group"+i+"'><div class='col-xs-12 col-sm-4' ><img  src='http://files.livechattools.webnode.com/200000508-ac725af604/live-chat-team.png' alt='Profile Image' class='img-responsive img-circle'  style='display:block;height: calc(4vh + 2vw);width: calc(4vh + 2vw)' /></div><div class='col-xs-12 col-sm-8' style='height: 8vh;text-align: left;'><h4 style='overflow-x: auto;padding: 0px;margin: 0px;position: relative;height: 4vh;top:2.5vh;font-size: calc(1vh + 1vw)'>%data%</h4></div><div class='clearfix'></div></li>";
-      groupname=groupname.replace('%data%',groups[i]);
-      $("#groups-list").append(groupname);
-    }
-
-    }
-  }
-});
-
+  <script type="text/javascript">                       
+      $.ajax({
+              url:'insertgroup.php',
+              dataType:'text',
+              success:function(data){
+                if(data!=''){
+                var groups=[];
+                groups=data.split(',');
+                grouplength=groups.length;
+                for(i=0;i<grouplength;i++){
+                  var groupname="<li class='list-group-item' style='padding: 1.2vh'  id='group"+i+"'><div class='col-xs-12 col-sm-4' ><img  src='http://files.livechattools.webnode.com/200000508-ac725af604/live-chat-team.png' alt='Profile Image' class='img-responsive img-circle'  style='display:block;height: calc(4vh + 2vw);width: calc(4vh + 2vw)' /></div><div class='col-xs-12 col-sm-8' style='height: 8vh;text-align: left;'><h4 style='overflow-x: auto;padding: 0px;margin: 0px;position: relative;height: 4vh;top:2.5vh;font-size: calc(1vh + 1vw)'>%data%</h4></div><div class='clearfix'></div></li>";
+                  groupname=groupname.replace('%data%',groups[i]);
+                  $("#groups-list").append(groupname);
+                }
+                }
+              }
+            });
 </script>
   <title>Quick Chat</title>
   <style type="text/css">
@@ -265,7 +263,8 @@
 </body>
 <script type="text/javascript" src="js/csscontrol.js"></script>
 <script type="text/javascript" src='js/chatmenu.js'></script>
-<script type="text/javascript">
+<!-- <script type="text/javascript" src='js/notification.js'></script>
+ --><script type="text/javascript">
   // create group control
   $('#hl').hide();
   $("#create").click(function(){
@@ -434,6 +433,7 @@ $('document').ready(function(){
         $('#testingmessage').html(data);
         var content2=$('#testingmessage').html();
         if(content!=content2){
+          //notifyMe();
           $('#testing').html(data);
           var objDiv = document.getElementById("testing");
           objDiv.scrollTop = objDiv.scrollHeight;

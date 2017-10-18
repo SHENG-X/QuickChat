@@ -445,12 +445,7 @@ $('document').ready(function(){
       type:'POST'
     });
   }
-},500);
-});
-
-$('document').ready(function(){
-  setInterval(function(){
-    $.ajax({
+  $.ajax({
       url:'kick.php',
       success:function(data){
         if(data==0){
@@ -462,8 +457,9 @@ $('document').ready(function(){
       }
     });
   
-  },500);
+},500);
 });
+
 
 //replace all function for cross site attacking
 function replaceAll(str, find, replace) {

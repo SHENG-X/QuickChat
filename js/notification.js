@@ -14,7 +14,7 @@ function notifyMe() {
     Notification.requestPermission();
   else {
     var notification = new Notification('QuickChat', {
-      icon: 'https://cdn.iconscout.com/public/images/icon/premium/png-256/message-text-love-heart-chatting-communication-3cdc5d9047f76ead-256x256.png',
+      icon: 'http://www.brandcrowd.com/gallery/brands/pictures/picture14077370183196.png',
       body: "New Message",
     });
 

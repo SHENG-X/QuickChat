@@ -8,7 +8,7 @@ if(isset($_POST['message'])){
 DB::query('INSERT INTO chatroom(groupid,userid,message) VALUES(:groupid,:userid,:message)',array(':groupid'=>$groupid,':userid'=>$userid,':message'=>$message));
 }
 	$groupid=DB::query('SELECT id FROM groups WHERE group_name=:group_name',array(':group_name'=>$group))[0]['id'];
-$allmessage=DB::query('SELECT * FROM chatroom,user WHERE groupid=:groupid AND chatroom.userid=user.id',array(':groupid'=>$groupid));
+$allmessage=DB::query('SELECT * FROM chatroom,user WHERE groupid=:groupid AND chatroom.userid=user.id ORDER BY time ASC',array(':groupid'=>$groupid));
 foreach($allmessage as $i){
 	if($i['userid']==$userid){
 		if(DB::query('SELECT img_url FROM profile_image WHERE userid=:userid',array(':userid'=>$userid))){

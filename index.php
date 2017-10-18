@@ -263,8 +263,8 @@
 </body>
 <script type="text/javascript" src="js/csscontrol.js"></script>
 <script type="text/javascript" src='js/chatmenu.js'></script>
-<!-- <script type="text/javascript" src='js/notification.js'></script>
- --><script type="text/javascript">
+<script type="text/javascript" src='js/notification.js'></script>
+<script type="text/javascript">
   // create group control
   $('#hl').hide();
   $("#create").click(function(){
@@ -433,7 +433,10 @@ $('document').ready(function(){
         $('#testingmessage').html(data);
         var content2=$('#testingmessage').html();
         if(content!=content2){
-          //notifyMe();
+          var str=data;
+          if(str.search('media-left')>0){
+                      notifyMe();
+          }
           $('#testing').html(data);
           var objDiv = document.getElementById("testing");
           objDiv.scrollTop = objDiv.scrollHeight;

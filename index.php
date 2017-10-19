@@ -26,7 +26,7 @@
                 groups=data.split(',');
                 grouplength=groups.length;
                 for(i=0;i<grouplength;i++){
-                  var groupname="<li class='list-group-item' style='padding: 1.2vh'  id='group"+i+"'><div class='col-xs-12 col-sm-4' ><img  src='http://files.livechattools.webnode.com/200000508-ac725af604/live-chat-team.png' alt='Profile Image' class='img-responsive img-circle'  style='display:block;height: calc(4vh + 2vw);width: calc(4vh + 2vw)' /></div><div class='col-xs-12 col-sm-8' style='height: 8vh;text-align: left;'><h4 style='overflow-x: auto;padding: 0px;margin: 0px;position: relative;height: 4vh;top:2.5vh;font-size: calc(1vh + 1vw)'>%data%</h4></div><div class='clearfix'></div></li>";
+                  var groupname="<li class='list-group-item' style='padding: 1.2vh' onclick='message(this)' id='group"+i+"'><div class='col-xs-12 col-sm-4' ><img  src='http://files.livechattools.webnode.com/200000508-ac725af604/live-chat-team.png' alt='Profile Image' class='img-responsive img-circle'  style='display:block;height: calc(4vh + 2vw);width: calc(4vh + 2vw)' /></div><div class='col-xs-12 col-sm-8' style='height: 8vh;text-align: left;'><h4 style='overflow-x: auto;padding: 0px;margin: 0px;position: relative;height: 4vh;top:2.5vh;font-size: calc(1vh + 1vw)'>%data%</h4></div><div class='clearfix'></div></li>";
                   groupname=groupname.replace('%data%',groups[i]);
                   $("#groups-list").append(groupname);
                 }
@@ -340,11 +340,32 @@
   });
 
 
-$('document').ready(function(){
-  $('li').click(function(){
-    $("#cover").hide();
-    var targetvar='#'+this.id+' h4';
-    $("#messagetitle").text($(targetvar).text());
+// $('document').ready(function(){
+//   $('li').click(function(){
+//     alert('click');
+//     $("#cover").hide();
+//     var targetvar='#'+this.id+' h4';
+//     $("#messagetitle").text($(targetvar).text());
+//     var group=$("#messagetitle").text();
+//     $('#testing').html('');
+//     $.ajax({
+//       url:'messagecontrol.php',
+//       data:{'group':group},
+//       dataType:'text',
+//       success:function(data){
+//         $('#testing').html(data);
+//         var objDiv = document.getElementById("testing");
+//         objDiv.scrollTop = objDiv.scrollHeight;
+//       },
+//       type:'POST'
+//     });
+// });
+// });
+
+function message(ele){
+  $("#cover").hide();
+    var targetvar='#'+ele.id+' h4';
+   $("#messagetitle").text($(targetvar).text());
     var group=$("#messagetitle").text();
     $('#testing').html('');
     $.ajax({
@@ -358,8 +379,9 @@ $('document').ready(function(){
       },
       type:'POST'
     });
-});
-});
+}
+
+
 
 //right side profile control
   $.ajax({
@@ -394,27 +416,27 @@ $('#sendmessage').click(function(){
   }
 });
 $('#message').keydown(function (e){
-    if(e.keyCode == 13){
+  if(e.keyCode == 13){
       var message=$('#message').val();
-  var group=$("#messagetitle").text();
-  message=replaceAll(message,'<','&lt');
-  message=replaceAll(message,'>','&gt');
-  if(message==''||message.trim()==''){
+      var group=$("#messagetitle").text();
+      message=replaceAll(message,'<','&lt');
+      message=replaceAll(message,'>','&gt');
+    if(message==''||message.trim()==''){
     alert('Can not send empty message!');
-  }
-  else{
-    $.ajax({
-      url:'messagecontrol.php',
-      data:{'group':group,'message':message},
-      dataType:'text',
-      success:function(data){
-        $('#testing').html(data);
-        var objDiv = document.getElementById("testing");
-        objDiv.scrollTop = objDiv.scrollHeight;
-        $('#message').val('');
-      },
-      type:'POST'
-    });
+    }
+    else{
+        $.ajax({
+        url:'messagecontrol.php',
+        data:{'group':group,'message':message},
+        dataType:'text',
+        success:function(data){
+          $('#testing').html(data);
+          var objDiv = document.getElementById("testing");
+          objDiv.scrollTop = objDiv.scrollHeight;
+          $('#message').val('');
+        },
+        type:'POST'
+      });
   }
     }
 })
@@ -434,17 +456,18 @@ $('document').ready(function(){
         var content2=$('#testingmessage').html();
         if(content!=content2){
           var str=data;
-          if(str.search('media-left')>0){
-                      notifyMe();
-          }
           $('#testing').html(data);
           var objDiv = document.getElementById("testing");
           objDiv.scrollTop = objDiv.scrollHeight;
+          if(str.search('media-left')>0){
+            notifyMe();
+          }
         }
       },
       type:'POST'
     });
   }
+
   $.ajax({
       url:'kick.php',
       success:function(data){
@@ -456,10 +479,16 @@ $('document').ready(function(){
         }
       }
     });
-  
+
 },500);
 });
 
+// $('document').ready(function(){
+//   setInterval(function(){
+    
+  
+//   },5000);
+// });
 
 //replace all function for cross site attacking
 function replaceAll(str, find, replace) {

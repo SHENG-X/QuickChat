@@ -52,24 +52,6 @@
   </form>
 </div>
 
-<script type="text/javascript">
-  $("#log-in").click(function(){
-    var username=$("#username").val();
-    var password=$('#password').val();
-    $.ajax({
-      url:'signin.php',
-      data:{'username':username,'password':password},
-      dataType:'text',
-      success: function(data){
-        if(data==1){
-            $(location).attr('href','index.php');
-        }else{
-          alert(data);
-        }
-      },
-      type: 'POST'
-    });
-  });
-</script>
+<script type="text/javascript" src='js/usermanagement.js'></script>
 </body>
 </html>

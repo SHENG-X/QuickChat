@@ -5,8 +5,8 @@ $('.message a').click(function(){
 $("#username").change(function(){
     var username=$('#username').val();
     $.ajax({
-            url: "register.php",
-            data:{'username':username},
+            url: "model.php",
+            data:{'command':'resigster','username':username},
             dataType:'text',
             success: function(data){
             if(data==0&&username!=''){
@@ -22,8 +22,8 @@ $("#username").change(function(){
   $("#password").change(function(){
     var password=$('#password').val();
     $.ajax({
-            url: "register.php",
-            data:{'password':password},
+            url: "model.php",
+            data:{'command':'resigster','password':password},
             dataType:'text',
             success: function(data){
             if(data==0&&password!=''){
@@ -39,8 +39,8 @@ $("#username").change(function(){
   $("#email").change(function(){
     var email=$('#email').val();
     $.ajax({
-            url: "register.php",
-            data:{'email':email},
+            url: "model.php",
+            data:{'command':'resigster','email':email},
             dataType:'text',
             success: function(data){
             if(data!=1){
@@ -58,8 +58,8 @@ $("#username").change(function(){
     var dd=$('#dob-dd').val();
     var mm=$('#dob-mm').val();
     $.ajax({
-            url: "register.php",
-            data:{'dob-dd':dd,'dob-mm':mm},
+            url: "model.php",
+            data:{'command':'resigster','dob-dd':dd,'dob-mm':mm},
             dataType:'text',
             success: function(data){
             if(data==0&&dd!=''){
@@ -76,8 +76,8 @@ $("#username").change(function(){
     var mm=$('#dob-mm').val();
     var dd=$('#dob-dd').val();
     $.ajax({
-            url: "register.php",
-            data:{'dob-mm':mm,'dob-dd':dd},
+            url: "model.php",
+            data:{'command':'resigster','dob-mm':mm,'dob-dd':dd},
             dataType:'text',
             success: function(data){
             if(data==0&&mm!=''||data=='10'){
@@ -93,8 +93,8 @@ $("#username").change(function(){
   $("#dob-yy").change(function(){
     var yy=$('#dob-yy').val();
     $.ajax({
-            url: "register.php",
-            data:{'dob-yy':yy},
+            url: "model.php",
+            data:{'command':'resigster','dob-yy':yy},
             dataType:'text',
             success: function(data){
             if(data==0&&yy!=''){
@@ -212,8 +212,8 @@ $("#username").change(function(){
         }
         else{
           $.ajax({
-              url:"register.php",
-              data:{'signup':1,'username2':username,'password2':password,'email2':email,'dobdd':dobdd,'dobmm':dobmm,'dobyy':dobyy,'gender':gender,'language':language,'country':country},
+              url:"model.php",
+              data:{'command':'resigster','signup':1,'username2':username,'password2':password,'email2':email,'dobdd':dobdd,'dobmm':dobmm,'dobyy':dobyy,'gender':gender,'language':language,'country':country},
               dataType:'text',
               success: function(data){
                 if(data==1){

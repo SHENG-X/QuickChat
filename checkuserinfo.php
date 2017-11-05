@@ -54,7 +54,7 @@ if(DB::query('SELECT id FROM user WHERE username=:username',array(':username'=>$
 								$url='https://www.w3schools.com/howto/img_avatar2.png';
 							}
 						}
-						echo "<img src='".$url."' width='40%' height='100vh' class='img-circle'><br><br><table style='width: 100%''><tr><td>Name:</td><td>".$username."</td></tr><tr><td>Date of Birth:</td><td>".$dob."</td></tr><tr><td>Gender:</td><td>".$gender."</td></tr><tr><td>Country:</td><td>".$country."</td></tr><tr><td>Language:</td><td>".$language."</td></tr></table><hr>";
+						echo "<img src='".$url."' width='40%' height='100vh' class='img-circle'><br><br><table class=\"table table-striped\" style='width: 100%''><tr><td>Name:</td><td>".$username."</td></tr><tr><td>Date of Birth:</td><td>".$dob."</td></tr><tr><td>Gender:</td><td>".$gender."</td></tr><tr><td>Country:</td><td>".$country."</td></tr><tr><td>Language:</td><td>".$language."</td></tr></table><hr>";
 						exit();
 					}
 				}		

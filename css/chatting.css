@@ -1,0 +1,231 @@
+hr{
+    margin-top: 12px;
+  }
+  textarea{
+    border:1px solid #eee;
+  }
+  .user_options{
+    position: fixed;
+    top:0px;
+    left: 50px;
+    display: none;
+    min-width: 150px;
+  }
+  .fa{
+    font-size:40px;
+    position:relative;
+    color: #777
+  }
+  .fa:hover{
+    cursor: pointer;
+    color: #aaa;
+  }
+  #header-container{
+    position: absolute;
+    padding: 20px;
+    top: 0px;
+    width: 100vw;
+    height: 50px;
+    border-bottom: 1px solid #eee;
+  }
+  .header-menu{
+    padding-top:8px;
+    display: inline-block;
+    position: absolute;
+    top: 0px;
+    text-align: center;
+  }    
+  .search-bar{
+    width: calc(100vw - 50px);
+    height: 40px;
+    margin: auto;
+    left: 50px;
+  }
+  .search-bar>input{
+    width: calc(80vw - 32px);
+    margin: auto;
+/*    display: none;
+*/  }
+  #group_chating_name{
+    display: none;
+  }
+  .search-bar>span{
+    display: inline-block;
+    font-size: 28px;
+    margin:0px;
+    padding: 0px;
+  }
+
+  @media screen and (max-width: 726px){
+    #menu-container{
+    width: 100vw;
+    height: 100vh;
+    position: absolute;
+    background: white;
+    left: -180vw;
+    z-index: 1;    
+    transition: 1.2s;
+  }
+  #chat_to{
+    display: none;
+  }
+  }
+  #menu-container *{
+    z-index: 3;
+  }
+  #menu-bar{
+    width: 50px;
+    display: inline-block;
+    height: 100%;
+    z-index: 5;
+    position: absolute;
+    overflow-y: auto;
+  }
+
+  #groupnames_m{
+    width: calc(100vw - 50px);
+    display: inline-block;
+    height: 100%;
+    position: absolute;
+    left: 50px;
+    background: white;
+  }
+  #groups-container{
+    position: absolute;
+    top: 50px;
+    width: 100vw;
+    height: calc(100vh - 50px);
+    overflow-y: auto;
+/*    background: black;*/
+/*    display: none;
+*/  }
+  #chatting_container{
+    position: absolute;
+    width: 100vw;
+    height: calc(100vh - 50px);
+    top:50px;
+    left: 0px;
+    margin:0px;
+    display: none;
+  }
+  #message_display{
+    width: 100%;
+    height: 90%;
+    overflow-y: auto;
+  }
+  #message_display div{
+    padding-left: 4px;
+    padding-right: 4px;
+  }
+  #sendmessage_control{
+    width: 100%;
+    height: 10%;
+    z-index: 2;
+  }
+  #menu-items{
+    border-right: 1px solid #eee;
+    height: 100vh;
+  }
+
+  @media screen and (min-width: 726px){
+    #header-container{
+      display: none;
+    }
+    #menu-container{
+      width: 30vw;
+      height: 100vh;
+      position: absolute;
+      background: white;
+      left:0px;
+      z-index: 3;    
+    }
+    #groupnames_m{
+    width: calc(35vw - 50px);
+    display: inline-block;
+    height: 100%;
+    position: absolute;
+    left: 50px;
+    border-right: 1px solid #eee;
+  }
+  ul>li h4{
+    width:8vh;
+    height: 8vh;
+  }
+  #groups-container{
+    display: none;
+  }
+  #chatting_container{
+    position: absolute;
+    width: 65vw;
+    height: calc(100% - 40px);
+    top:0px;
+    left: 35vw;
+    margin:0px;
+    display: none;
+  }
+  .fa-close{
+    display: none;
+  }
+   #chat_to{
+    height:40px;
+    display: table-cell;
+    text-align:center;
+    width: 100vw;
+    vertical-align: middle;
+    font-size: 28px;
+    border-bottom: 1px solid #eee;
+  }
+  }
+
+  @media screen and (min-width: 900px){
+    #header-container{
+      display: none;
+    }
+    #menu-container{
+      width: 30vw;
+      height: 100vh;
+      position: absolute;
+      background: white;
+      left:0px;
+      z-index: 1;    
+    }
+    #groupnames_m{
+    width: calc(30vw - 50px);
+    display: inline-block;
+    height: 100%;
+    position: absolute;
+    left: 50px;
+  }
+  ul>li h4{
+    width:8vh;
+    height: 8vh;
+  }
+  #groups-container{
+    display: none;
+  }
+  #chatting_container{
+    position: absolute;
+    width: 70vw;
+    height: calc(100% - 40px);
+    top:0px;
+    left:30vw;
+    margin:0px;
+    display: none;
+    z-index: 11;
+  }
+  .fa-close{
+    display: none;
+  }
+   #chat_to{
+    height:40px;
+    display: table-cell;
+    text-align:center;
+    width: 100vw;
+    vertical-align: middle;
+    font-size: 28px;
+    border-bottom: 1px solid #eee;
+  }
+  }
+  .form-group>input[type='password']{
+    margin-bottom:10px;
+  }

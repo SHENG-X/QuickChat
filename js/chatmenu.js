@@ -40,7 +40,8 @@ $('#signoutall').click(function(){
             }
           },
           error:function(){
-            alert('Error..');
+            $("#changepass-error").show();
+            $("#changepass-error-indicator").text('Error..');
           },
           type:'POST'
         });
@@ -48,20 +49,23 @@ $('#signoutall').click(function(){
       else{
         $("#newpass").css('border-color','red');
         $("#confirmpass").css('border-color','red');
-        alert('Invalid password');
+        $("#changepass-error").show();
+        $("#changepass-error-indicator").text('Invalid Password!');
       }
     }
     else{
       $("#newpass").css('border-color','red');
       $("#confirmpass").css('border-color','red');
-      alert('Password does not match');
+      $("#changepass-error").show();
+      $("#changepass-error-indicator").text('Password Does Not Match!');
     }
   }
   else{
     if(oldpassword==''){$("#oldpass").css('border-color','red');}
     if(newpassword==''){$("#newpass").css('border-color','red');}
     if(confirmpassword==''){$("#confirmpass").css('border-color','red');}
-    alert('Please complete the form');
+    $("#changepass-error").show();
+    $("#changepass-error-indicator").text('Please Complete the Form!');
   }
  });
 $("#oldpass").click(function(){
@@ -89,7 +93,8 @@ $("#confirmpass").click(function(){
                 $("#myModal1").modal('hide');
               }
               else{
-                alert('Not a Image Forbidden!');
+                $("#changeprofileimage-error").show();
+                $("#changeprofileimage-error-indicator").text('Not a Image Forbidden!');
               }
             },
             type:'POST'
@@ -149,8 +154,9 @@ $("#create").click(function(){
         dataType:'text',
         success:function(data){
           if(data==0){
-            alert('Warning: Group name taken');
-          }
+             $("#creategroup-error").show();
+             $("#creategroup-error-indicator").text('Group Name Was Taken!');
+              }
           else{
             alert('Group Created!');
             location.reload();
@@ -160,18 +166,20 @@ $("#create").click(function(){
       });
     }
     else{
-      alert('Warning:Invalid group name');
+      $("#creategroup-error").show();
+      $("#creategroup-error-indicator").text('Invalid Group Name!');
     }
   }
   else{
-      alert('Forbidden!');
+      $("#creategroup-error").show();
+      $("#creategroup-error-indicator").text('Forbidden!');
   }    
 });
 //add a group
 $("#add-group").click(function(){
     var groupname=$('#add-groupname').val();
     if(groupname.length<3){
-      alert('Warning: Invalid group name');
+      $('#groupname-search-error').show();
     }
     else{
       $.ajax({
@@ -180,17 +188,20 @@ $("#add-group").click(function(){
         dataType:'text',
         success:function(data){
           if(data==0){
-            alert('Warning: Group was not find');
+            $('#groupname-search-error').show();
           }
           else if(data=='Success!'){
             location.reload();
           }
-          else{alert(data);}
+          else{
+                $('#groupname-search-error').show();
+}
         },
         type:'POST'
       });
     }
   });
+
 //look up user info
 $('#lookup-username-btn').click(function(){
   var username=$('#lookup-username').val();
@@ -205,7 +216,7 @@ $('#lookup-username-btn').click(function(){
 
       }
       else{
-        alert('Forbidden!');
+        $("#userlookup-error").show();
       }
     },
     type:'POST'
@@ -228,7 +239,7 @@ $('#leavegroup-btn').click(function(){
             location.reload();
           }
           else{
-            alert(data);
+            $("#leavegroup-error").show();
           }
         },
         type:'POST'

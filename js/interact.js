@@ -41,13 +41,44 @@
    $('#leavegroup').click(function(){
     $('#myModal3').modal('toggle');
   });
-    $('#creategroup').click(function(){
+  $('#creategroup').click(function(){
     $('#myModal5').modal('toggle');
   });
-    $('#addgroup').click(function(){
+  $('#addgroup').click(function(){
     $('#myModal6').modal('toggle');
   });
-
+  $('#add-groupname').click(function(){
+    $('#groupname-search-error').hide();
+  });
+  $('#leavegroup-name').click(function(){
+    $('#leavegroup-error').hide();
+  });
+  $('#lookup-username').click(function(){
+    $('#userlookup-error').hide();
+  });
+  $('#create-groupname').click(function(){
+    $('#creategroup-error').hide();
+  });
+  $('#oldpass').click(function(){
+    $('#changepass-error').hide();
+  });
+  $('#newpass').click(function(){
+    $('#changepass-error').hide();
+  });
+  $('#confirmpass').click(function(){
+    $('#changepass-error').hide();
+  });
+$('#url').click(function(){
+    $('#changeprofileimage-error').hide();
+  });
+$(".modal-footer>button").click(function(){
+    $('#groupname-search-error').hide();
+    $('#leavegroup-error').hide();
+    $('#creategroup-error').hide();
+    $('#userlookup-error').hide();
+    $('#changepass-error').hide();
+    $('#changeprofileimage-error').hide();
+});
 
  if(typeof(EventSource)!=='undefined'){
     var source=new EventSource('kick.php');

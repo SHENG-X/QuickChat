@@ -7,7 +7,8 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
   <link rel='stylesheet prefetch' href='http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css'>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"> 
+  
   <link rel="stylesheet" href="css/style2.css">
   <style type="text/css">
   input::-webkit-contacts-auto-fill-button {
@@ -40,21 +41,21 @@
         <input type="text" placeholder="User Name" id='username'/>
         <div class="input-icon"><i class="fa fa-user"></i></div>
         <div class="alert" id='username-warning'>
-          <strong>Warning:</strong> Invalid Username!
+          <strong>&#x2715;</strong> Invalid Username!
         </div>
       </div>
       <div class="input-group input-group-icon">
         <input type="email" placeholder="Email Adress" id='email'/>
         <div class="input-icon"><i class="fa fa-envelope"></i></div>
         <div class="alert" id='email-warning'>
-          <strong>Warning:</strong>Please enter valid email!
+          <strong>&#x2715;</strong>Please Enter Valid Email!
         </div>
       </div>
       <div class="input-group input-group-icon">
         <input type="password" placeholder="Password" id='password'/>
         <div class="input-icon"><i class="fa fa-key"></i></div>
         <div class="alert" id='password-warning'>
-          <strong>Warning:</strong> Password length should be more than 5 characthers
+          <strong>&#x2715;</strong> Password Length Should Be More Than 5 Characthers
         </div>
       </div>
     </div>
@@ -73,7 +74,7 @@
           </div>
         </div>
         <div class="alert" id='dob-warning'>
-          <strong>Warning: </strong>Please enter valid Birth date.
+          <strong>&#x2715;</strong>Please Enter Valid Birth Date.
         </div>
       </div>
       <div class="col-half">
@@ -108,7 +109,7 @@
     </div>
     <div class="row">
       <h4>Terms and Conditions</h4>
-      <h5><a href="consent.pdf" >Privacy terms & Conditions</a></h5>
+      <h5 ><a href="consent.pdf"  >Privacy terms & Conditions</a></h5>
       <div class="input-group">
         <input type="checkbox" id="terms"/>
         <label for="terms">I accept the terms and conditions for signing up to this service, and hereby confirm I have read the privacy policy.</label>
@@ -118,7 +119,11 @@
           <input type="button" name="signup" value="Sign Up" id='sign-up'  class='nextbutton'/>
     </div>
   </form>
+  
 </div>
+
+
+
 </body>
 <script type="text/javascript" src='js/index.js'></script>
 </html>

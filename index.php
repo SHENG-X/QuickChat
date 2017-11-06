@@ -122,6 +122,12 @@
               </button>
             </div>
           </div>
+
+          <div style="color: red;display: none" id='changeprofileimage-error'>
+            <span class="glyphicon glyphicon-remove-sign"></span>
+            <span id='changeprofileimage-error-indicator'></span>
+          </div>
+
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -157,6 +163,12 @@
 
             <input type="submit" class='btn btn-default' id="changepassword" value="Confirm" >
           </div>
+
+           <div style="color: red;display: none" id='changepass-error'>
+            <span class="glyphicon glyphicon-remove-sign"></span>
+            <span id='changepass-error-indicator'></span>
+          </div>
+
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -184,6 +196,12 @@
               </button>
             </div>
           </div>
+
+          <div style="color: red;display: none" id='userlookup-error'>
+            <span class="glyphicon glyphicon-remove-sign"></span>
+            <span id='userlookup-error-indicator'>Forbidden</span>
+          </div>
+
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -211,6 +229,12 @@
               </button>
             </div>
           </div>
+
+          <div style="color: red;display: none" id='leavegroup-error'>
+            <span class="glyphicon glyphicon-remove-sign"></span>
+            <span id='leavegroup-error-indicator'>Forbidden</span>
+          </div>
+
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -237,6 +261,12 @@
               </button>
             </div>
           </div>
+
+           <div style="color: red;display: none" id='creategroup-error'>
+            <span class="glyphicon glyphicon-remove-sign"></span>
+            <span id='creategroup-error-indicator'></span>
+          </div>
+
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -262,6 +292,10 @@
                 <i class="glyphicon glyphicon-ok-sign"></i>
               </button>
             </div>
+          </div>
+          <div style="color: red;display: none" id='groupname-search-error'>
+            <span class="glyphicon glyphicon-remove-sign"></span>
+            <span>Group Was not Found</span>
           </div>
         </div>
         <div class="modal-footer">

@@ -6,7 +6,7 @@ $("#username").change(function(){
     var username=$('#username').val();
     $.ajax({
             url: "model.php",
-            data:{'command':'resigster','username':username},
+            data:{'command':'register','username':username},
             dataType:'text',
             success: function(data){
             if(data==0&&username!=''){
@@ -23,7 +23,7 @@ $("#username").change(function(){
     var password=$('#password').val();
     $.ajax({
             url: "model.php",
-            data:{'command':'resigster','password':password},
+            data:{'command':'register','password':password},
             dataType:'text',
             success: function(data){
             if(data==0&&password!=''){
@@ -40,11 +40,11 @@ $("#username").change(function(){
     var email=$('#email').val();
     $.ajax({
             url: "model.php",
-            data:{'command':'resigster','email':email},
+            data:{'command':'register','email':email},
             dataType:'text',
             success: function(data){
             if(data!=1){
-              $('#email-warning').html("<strong>Warning: </strong>"+data);
+              $('#email-warning').html("<strong>&#x2715; </strong>"+data);
               $('#email-warning').show();
               $('#email').val('');
               $('#email').css('border-color', 'red');
@@ -59,7 +59,7 @@ $("#username").change(function(){
     var mm=$('#dob-mm').val();
     $.ajax({
             url: "model.php",
-            data:{'command':'resigster','dob-dd':dd,'dob-mm':mm},
+            data:{'command':'register','dob-dd':dd,'dob-mm':mm},
             dataType:'text',
             success: function(data){
             if(data==0&&dd!=''){
@@ -77,7 +77,7 @@ $("#username").change(function(){
     var dd=$('#dob-dd').val();
     $.ajax({
             url: "model.php",
-            data:{'command':'resigster','dob-mm':mm,'dob-dd':dd},
+            data:{'command':'register','dob-mm':mm,'dob-dd':dd},
             dataType:'text',
             success: function(data){
             if(data==0&&mm!=''||data=='10'){
@@ -94,7 +94,7 @@ $("#username").change(function(){
     var yy=$('#dob-yy').val();
     $.ajax({
             url: "model.php",
-            data:{'command':'resigster','dob-yy':yy},
+            data:{'command':'register','dob-yy':yy},
             dataType:'text',
             success: function(data){
             if(data==0&&yy!=''){
@@ -213,7 +213,7 @@ $("#username").change(function(){
         else{
           $.ajax({
               url:"model.php",
-              data:{'command':'resigster','signup':1,'username2':username,'password2':password,'email2':email,'dobdd':dobdd,'dobmm':dobmm,'dobyy':dobyy,'gender':gender,'language':language,'country':country},
+              data:{'command':'register','signup':1,'username2':username,'password2':password,'email2':email,'dobdd':dobdd,'dobmm':dobmm,'dobyy':dobyy,'gender':gender,'language':language,'country':country},
               dataType:'text',
               success: function(data){
                 if(data==1){

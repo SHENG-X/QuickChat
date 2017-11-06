@@ -79,17 +79,18 @@ $(".modal-footer>button").click(function(){
     $('#changepass-error').hide();
     $('#changeprofileimage-error').hide();
 });
+  var timer;
 
  if(typeof(EventSource)!=='undefined'){
     var source=new EventSource('kick.php');
     source.onmessage=function(event){
       if(event.data==0){
+        clearInterval(timer);
         location.reload();
       }
     }
    
   }
-  var timer;
 
   function message(ele){
     var targetvar='#groups-list1 #'+ele.id+' h4';
@@ -111,9 +112,14 @@ $(".modal-footer>button").click(function(){
         success:function(data){
           $('#message-holder').html(data);
           if($('#message-holder').html()!=$('#message_display').html()){
-                $('#message_display').html(data);
-                var objDiv = document.getElementById("message_display");
-                objDiv.scrollTop = objDiv.scrollHeight;
+            if($('#message_display>div').last().attr('id')=='otheruser'){
+              if($('#message-holder>div').length>$('#message_display>div').length){
+                  notifyMe();
+              }
+            }
+            $('#message_display').html(data);
+            var objDiv = document.getElementById("message_display");
+            objDiv.scrollTop = objDiv.scrollHeight;
           }
         }
         });

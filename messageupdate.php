@@ -18,7 +18,7 @@ foreach($allmessage as $i){
 				$url='https://www.w3schools.com/howto/img_avatar2.png';
 			}
 		}
-		echo "<div class=\"media\" style=\"width:100%;\"> <div class=\"media-body\"><h4 class=\"media-heading\" style='text-align:right'>".$i['username']."<small><i style='font-size:9px'> (".$i['time'].")</i></small></h4><hr style='margin:0px;'><div style='background:blue;'><p style='width: 29vw;float:right;text-align:right'>".$i['message']."</p></div></div><div class=\"media-right\"><img class='img-circle' src='".$url."' class=\"media-object\" style=\"width:45px;height:45px\"></div></div>";
+		echo "<div id='currentuser' class=\"media\" style=\"width:100%;\"> <div class=\"media-body\"><h4 class=\"media-heading\" style='text-align:right'>".$i['username']."<small><i style='font-size:9px'> (".$i['time'].")</i></small></h4><hr style='margin:0px;'><div style='background:blue;'><p style='width: 29vw;float:right;text-align:right'>".$i['message']."</p></div></div><div class=\"media-right\"><img class='img-circle' src='".$url."' class=\"media-object\" style=\"width:45px;height:45px\"></div></div>";
 		}
 	else{
 		if(DB::query('SELECT img_url FROM profile_image WHERE userid=:userid',array(':userid'=>$i['userid']))){
@@ -33,7 +33,7 @@ foreach($allmessage as $i){
 				$url='https://www.w3schools.com/howto/img_avatar2.png';
 			}
 		}
-		echo "<div class=\"media\" style=\"width:100%;\"> <div class=\"media-left\"><img class='img-circle' src='".$url."' class=\"media-object\" style=\"width:45px;height:45px\"></div><div class=\"media-body\"><h4 class=\"media-heading\">".$i['username']."<small><i style='font-size:9px'> (".$i['time'].")</i></small></h4><hr style='margin:0px;'><p style='width: 30vw;text-align:left'>".$i['message']."</p></div></div>";
+		echo "<div id='otheruser' class=\"media\" style=\"width:100%;\"> <div class=\"media-left\"><img class='img-circle' src='".$url."' class=\"media-object\" style=\"width:45px;height:45px\"></div><div class=\"media-body\"><h4 class=\"media-heading\">".$i['username']."<small><i style='font-size:9px'> (".$i['time'].")</i></small></h4><hr style='margin:0px;'><p style='width: 30vw;text-align:left'>".$i['message']."</p></div></div>";
 	}
 }
 ?>

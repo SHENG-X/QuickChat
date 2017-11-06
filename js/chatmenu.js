@@ -1,4 +1,5 @@
 $('#signout').click(function(){
+    clearInterval(timer);
     $.ajax({
       url:'signout.php',
       success:function(){
@@ -8,6 +9,7 @@ $('#signout').click(function(){
   });
 
 $('#signoutall').click(function(){
+    clearInterval(timer);
     $.ajax({
       url:'model.php',
       data:{'command':'signout','signoutall':1},

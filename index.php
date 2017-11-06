@@ -16,6 +16,8 @@
   <!-- Latest compiled JavaScript -->
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
   <script type="text/javascript" src='js/list-controller.js'></script>
+  <script type="text/javascript" src='js/notification.js'></script>
+
   <title>Quick Chat</title>
   <link rel="stylesheet" type="text/css" href="css/chatting.css">
   </head>
